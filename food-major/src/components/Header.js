@@ -43,7 +43,7 @@ function Header() {
         <Wrapper>
             <img src={logo} alt="logo" height="40px" style={{marginLeft: "30px"}}/>
             <Input>
-                <InputConsol placeholder="Search"/>
+                <InputConsol placeholder="식당 혹은 메뉴"/>
                 <Button><img src={search} alt="search" height="15px"/></Button>
             </Input>
             <img src={user} alt="user" height="40px" style={{marginRight: "30px"}}/>
