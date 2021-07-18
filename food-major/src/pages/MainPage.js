@@ -40,7 +40,6 @@ class MainPage extends React.Component {
   render() {
     return(
       <div>
-        <Header/>
         <Banner>
           <ImgSlide />
         </Banner>
