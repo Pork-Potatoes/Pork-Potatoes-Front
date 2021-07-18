@@ -5,7 +5,10 @@ import logo from "../assets/logo.png";
 import search from "../assets/search.png";
 import user from "../assets/user.png";
 
+import MyButton from "./MyButton";
+
 const Wrapper = styled.div`
+    position: fixed;
     background-color: white;
     border-bottom: 1px solid #e0e0e0;
     display: flex;
@@ -38,6 +41,7 @@ const Button = styled.button`
     height: 40px
 `
 
+
 function Header() {
     return (
         <Wrapper>
@@ -46,7 +50,7 @@ function Header() {
                 <InputConsol placeholder="식당 혹은 메뉴"/>
                 <Button><img src={search} alt="search" height="15px"/></Button>
             </Input>
-            <img src={user} alt="user" height="40px" style={{marginRight: "30px"}}/>
+            <MyButton />
         </Wrapper>
     );
 }
