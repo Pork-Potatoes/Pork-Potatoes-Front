@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "./components/Header";
 import Review from "./components/Review";
 import image from "./assets/reviewImg.png";
+import ImgSlide from "./components/ImgSlide";
 
 const Banner = styled.div`
   background-color: #9FB7B9;
@@ -10,6 +11,7 @@ const Banner = styled.div`
   height: 60vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `
 
 const HOTReview = styled.div`
@@ -39,7 +41,9 @@ class App extends React.Component {
     return(
       <div>
         <Header/>
-        <Banner></Banner>
+        <Banner>
+          <ImgSlide />
+        </Banner>
         <HOTReview>
           <h3 style={{marginBottom:0, marginLeft:15}}>오늘의 HOT 리뷰</h3>
           <Contents>
