@@ -1,17 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import Header from "./components/Header";
-import Review from "./components/Review";
-
-import image from "./assets/reviewImg.png";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import MyPage from './pages/MyPage';
+import ListPage from './pages/ListPage';
+import DetailPage from './pages/DetailPage';
+import SearchPage from './pages/SearchPage';
 
 class App extends React.Component {
   render() {
     return(
       <div>
-        <Header/>
-        <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/>
-      </div>
+        <Route path="/" component={MainPage} exact={true} />
+        <Route path="/mypage" component={MyPage} />
+        <Route path="/listpage" component={ListPage} />
+        <Route path="/detail" component={DetailPage} />
+        <Route path="/searchpage" component={SearchPage} /></div>
     );
   }
 }
