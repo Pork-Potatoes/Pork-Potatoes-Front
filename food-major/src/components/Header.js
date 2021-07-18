@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import logo from "../assets/logo.png";
 import search from "../assets/search.png";
-import user from "../assets/user.png";
 
 import MyButton from "./MyButton";
 
@@ -17,6 +16,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     width: 100%;
     height: 70px;
+    z-index: 100;
 `
 const Input = styled.div`
     display:flex;
