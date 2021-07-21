@@ -47,11 +47,11 @@ const Tag = styled.button`
     height: 20px;
     border-radius: 50px;
     margin-right: 3px;
-    margin-bottom: 3px;
+    margin-top: 50px;
     cursor: pointer;
 `
 
-const Review = ({ image, content, restaurantName, university, tags, score }) => {
+const Review = ({ id, image, content, restaurantName, tags, score }) => {
     const [hover, setHover] = useState('off');
     const onMouseEnter = () => setHover('on');
     const onMouseLeave = () => setHover('off');
@@ -79,7 +79,6 @@ const Review = ({ image, content, restaurantName, university, tags, score }) => 
             </ImageWrapper>
             <Wrapper>
                 <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
-                <h6 style={{color: "black", marginTop:"3px"}}>{university}</h6>
                 <div>
                     {
                         tags.map(tag => (
