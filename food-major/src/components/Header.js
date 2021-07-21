@@ -45,7 +45,7 @@ const Button = styled.button`
 function Header() {
     return (
         <Wrapper>
-            <img src={logo} alt="logo" height="40px" style={{marginLeft: "30px"}}/>
+            <a href="/"><img src={logo} alt="logo" height="40px" style={{marginLeft: "30px"}}/></a>
             <Input>
                 <InputConsol placeholder="식당 혹은 메뉴"/>
                 <Button><img src={search} alt="search" height="15px"/></Button>
