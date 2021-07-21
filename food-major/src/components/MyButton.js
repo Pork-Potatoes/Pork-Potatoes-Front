@@ -24,7 +24,7 @@ class MyButton extends Component {
         <button
         onClick={this.openModal} alt="user" height="40px"
         style={{marginRight: "30px", border:"none",backgroundColor:"white"}}
-        ><img src={user}></img></button>
+        ><img alt="user" src={user}></img></button>
         <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
       </>
     );
