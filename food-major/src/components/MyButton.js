@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SignIn from "./SignIn";
+import SignIn from "../pages/SignInPage";
 import user from "../assets/user.png";
 
 class MyButton extends Component {

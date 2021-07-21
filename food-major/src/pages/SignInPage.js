@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import KaKaoLogin from "react-kakao-login";
-import "./SignIn.css";
+import "../components/Modal.css";
 
 const BtnWrapper = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
 `;
 
 const KaKaoBtn = styled(KaKaoLogin)`
@@ -75,21 +75,13 @@ class SignIn extends Component {
       <>
         {isOpen ? (  
           <div className="modal">
-            <div onClick={close}>
-              <div className="loginModal">
-                <span className="close" onClick={close}>
-                  &times;
-                </span>
-                <div className="modalContents" onClick={isOpen}>
-                  <h1>신촌대 맛집전공 원서 제출</h1>
-                  <div className="loginMid">
-                    <label className="autoLogin" for="hint">
-                      {" "}
-                      <input type="checkbox" id="hint" /> 로그인 유지하기
-                    </label>
-                  </div>
-
-                  <BtnWrapper>
+            <section>
+              <header>
+                <button className="close" onClick={close}>&times;</button>
+              </header>
+              <main onClick={isOpen}>
+                <h1>신촌대 맛집전공 원서 제출</h1>
+                <BtnWrapper>
                   <KaKaoBtn
                     jsKey={'315c8c3d577b20ffac6705a2b365e750'}
                     buttonText="KaKao"
@@ -100,10 +92,9 @@ class SignIn extends Component {
                     />
                   <NaverBtn>네이버로 로그인하기</NaverBtn>
                   <GoogleBtn>구글로 로그인하기</GoogleBtn>
-                  </BtnWrapper>
-                </div>
-              </div>
-            </div>
+                </BtnWrapper>
+              </main>
+            </section>
           </div>
         ) : null}
       </>
