@@ -16,7 +16,7 @@ class App extends React.Component {
         <Header/>
         <Switch>
           <Route path="/" component={MainPage} exact={true} />
-          <Route path="/mypage" component={MyPage} />
+          <Route path="/mypage/myreview" component={MyPage} />
           <Route path="/listpage" component={ListPage} />
           <Route path="/detail" component={DetailPage} />
           <Route path="/searchpage" component={SearchPage} />
