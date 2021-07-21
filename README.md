@@ -33,17 +33,23 @@
  ┃ ┣ 🗂 components
  ┃ ┃ ┣ 📑 Header.js
  ┃ ┃ ┣ 📑 ImgSlide.js
+ ┃ ┃ ┣ 📑 List.js
  ┃ ┃ ┣ 📑 MyButton.js
  ┃ ┃ ┣ 📑 Restaurant.js
  ┃ ┃ ┣ 📑 Review.js
+ ┃ ┃ ┣ 📑 Sidebar.js
  ┃ ┃ ┣ 📑 SignIn.js
  ┃ ┃ ┗ 📑 SignIn.css
  ┃ ┣ 🗂 pages
  ┃ ┃ ┣ 📑 DetailPage.js
+ ┃ ┃ ┣ 📑 LikedList.js
  ┃ ┃ ┣ 📑 ListPage.js
  ┃ ┃ ┣ 📑 MainPage.js
+ ┃ ┃ ┣ 📑 MyListPage.js
  ┃ ┃ ┣ 📑 MyPage.js
- ┃ ┃ ┗ 📑 SearchPage.js
+ ┃ ┃ ┣ 📑 MyReviewPage.js
+ ┃ ┃ ┣ 📑 SearchPage.js
+ ┃ ┃ ┗ 📑 SettingPage.js
  ┃ ┣ 📑 App.js
  ┃ ┣ 📑 App.css
  ┃ ┣ 📑 index.js
