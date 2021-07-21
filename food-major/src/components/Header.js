@@ -50,6 +50,7 @@ function Header() {
                 <InputConsol placeholder="식당 혹은 메뉴"/>
                 <Button><img src={search} alt="search" height="15px"/></Button>
             </Input>
+            <a href="/mypage/myreview"> 임시 마이페이지 버튼</a>
             <MyButton />
         </Wrapper>
     );
