@@ -18,7 +18,7 @@ class App extends React.Component {
           <Route path="/" component={MainPage} exact={true} />
           <Route path="/mypage/myreview" component={MyPage} />
           <Route path="/listpage" component={ListPage} />
-          <Route path="/detail" component={DetailPage} />
+          <Route path="/detailpage" component={DetailPage} />
           <Route path="/searchpage" component={SearchPage} />
         </Switch>
         <Container styles={{bottom:'3vh', right: '3vw'}}>
