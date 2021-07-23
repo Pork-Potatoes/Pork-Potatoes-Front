@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
+import ReviewPage from "../pages/ReviewPage";
 
 const Container = styled.a`
     margin: 15px;
@@ -52,6 +53,9 @@ const Tag = styled.button`
 `
 
 const Review = ({ id, image, content, restaurantName, tags, score }) => {
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const openModal = () => {setModalOpen(true);}
+    const closeModal = () => {setModalOpen(false);}
     const [hover, setHover] = useState('off');
     const onMouseEnter = () => setHover('on');
     const onMouseLeave = () => setHover('off');
@@ -70,7 +74,8 @@ const Review = ({ id, image, content, restaurantName, tags, score }) => {
     }
 
     return (
-        <Container href="http://www.naver.com">
+        <div>
+        <Container onClick={openModal}>
             <ImageWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <Image src={image}></Image>
                 {
@@ -93,6 +98,8 @@ const Review = ({ id, image, content, restaurantName, tags, score }) => {
                 </div>
             </Wrapper>
         </Container>
+        <ReviewPage open={ modalOpen } close={ closeModal } header="Modal heading"></ReviewPage>
+        </div>
     );
   }
 
