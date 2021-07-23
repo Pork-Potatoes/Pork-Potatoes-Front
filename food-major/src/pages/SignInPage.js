@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import KaKaoLogin from "react-kakao-login";
 import "../components/Modal.css";
+import logo from '../assets/logo.png';
 
 const BtnWrapper = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    margin-top: 27px;
 `;
 
 const KaKaoBtn = styled(KaKaoLogin)`
@@ -41,7 +43,7 @@ const NaverBtn =styled.button`
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 19px;
     &:hover{
         box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2)
     }
@@ -60,7 +62,7 @@ const GoogleBtn =styled.button`
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 19px;
     &:hover{
         box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2)
     }
@@ -76,10 +78,11 @@ class SignIn extends Component {
           <div className="modal">
             <section>
               <header>
-                <button className="close" onClick={close}>&times;</button>
+                <button className="close" onClick={close} />
               </header>
               <main onClick={isOpen}>
-                <h1>신촌대 맛집전공 원서 제출</h1>
+                <text style={{fontSize:"37px"}}>신촌대 맛집전공 원서 제출</text>
+                <text style={{fontSize:"24px",marginTop:"32px"}}>응시 방법을 선택하세요.</text>
                 <BtnWrapper>
                   <KaKaoBtn
                     jsKey={'315c8c3d577b20ffac6705a2b365e750'}
@@ -93,6 +96,9 @@ class SignIn extends Component {
                   <GoogleBtn>구글로 로그인하기</GoogleBtn>
                 </BtnWrapper>
               </main>
+              <footer>
+                <img src={logo} width="80px" height='26px'></img>
+              </footer>
             </section>
           </div>
         ) : null}
@@ -102,3 +108,4 @@ class SignIn extends Component {
 }
 
 export default SignIn;
+

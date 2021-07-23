@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Container, Button } from 'react-floating-action-button';
-import { HiPencil } from "react-icons/hi";
+
 import Header from "./components/Header";
 import MainPage from './pages/MainPage';
 import MyPage from './pages/MyPage';
 import ListPage from './pages/ListPage';
 import DetailPage from './pages/DetailPage';
 import SearchPage from './pages/SearchPage';
+import WriteReviewButton from './components/WriteReviewButton';
 
 class App extends React.Component {
   render() {
@@ -21,18 +21,7 @@ class App extends React.Component {
           <Route path="/detailpage" component={DetailPage} />
           <Route path="/searchpage" component={SearchPage} />
         </Switch>
-        <Container styles={{bottom:'3vh', right: '3vw'}}>
-            <Button
-              styles={{
-                backgroundColor:'#F06D58',
-                width: '63px',
-                height: '63px',
-                cursor: 'pointer'
-              }}
-              onClick={() => alert('리뷰작성')}>
-                <HiPencil size="40px" color="white"/>
-            </Button>
-        </Container>
+        <WriteReviewButton />
       </BrowserRouter>
     );
   }
