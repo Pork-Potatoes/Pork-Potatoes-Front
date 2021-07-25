@@ -92,8 +92,8 @@ class SignIn extends Component {
                     onLogout={console.info}
                     getProfile={true}
                     />
-                  <NaverBtn>네이버로 로그인하기</NaverBtn>
-                  <GoogleBtn>구글로 로그인하기</GoogleBtn>
+                  <NaverBtn><a href="http://localhost:8080/oauth2/authorization/naver">네이버로 로그인하기</a></NaverBtn>
+                  <GoogleBtn><a href="http://localhost:8080/oauth2/authorization/google?redirect_uri=<http://localhost:3000>">구글로 로그인하기</a></GoogleBtn>
                 </BtnWrapper>
               </main>
               <footer>
