@@ -7,3 +7,4 @@ npm install react-icons
 npm install react-material-ui-carousel
 npm install @material-ui/lab
 npm install --save react-rounded-image
+npm install react-select

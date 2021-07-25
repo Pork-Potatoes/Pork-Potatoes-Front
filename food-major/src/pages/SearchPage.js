@@ -6,6 +6,7 @@ import reviewIcon from "../assets/reviewIcon.png";
 import Review from "../components/Review";
 import image from "../assets/reviewImg.png";
 import NewRestaurant from '../components/NewRestaurant';
+import Sort from '../components/Sort.js';
 
 const Filtering = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const Filtering = styled.div`
   position: fixed;
   background-color: white;
   box-shadow: 0px 2px 10px 0px silver;
+  z-index:100;
 `
 
 const TagBox = styled.div`
@@ -60,6 +62,8 @@ const Main = styled.div`
 const Result = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
@@ -117,6 +121,7 @@ const SearchPage = () => {
     <Main>
       <Result>
         <h2>떡볶이 검색결과</h2>
+        <Sort />
       </Result>
       <SearchRestaurant>
         <div>
@@ -138,12 +143,12 @@ const SearchPage = () => {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
         </Contents>
       </SearchReview>
     </Main>

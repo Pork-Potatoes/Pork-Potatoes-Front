@@ -9,8 +9,8 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 450px;
-    height: 150px;
-    padding: 10px;
+    height: 70px;
+    padding: 20px;
     margin: 10px;
     border: solid 1px #D1D1D1;
     border-radius: 15px;
@@ -22,20 +22,9 @@ const Wrapper = styled.a`
     justify-content: space-between;
     text-decoration: none;
 `
-const Tag = styled.button`
-    background-color: #d57358;
-    font-size: xx-small;
-    color: white;
-    padding-inline: 10px;
-    border: none;
-    height: 20px;
-    border-radius: 50px;
-    margin-right: 3px;
-    margin-bottom: 3px;
-    cursor: pointer;
-`
 
-const Restaurant = ({ key, restaurantName, university, tags, score, number, like }) => {
+
+const Restaurant = ({ key, restaurantName, score, number, like }) => {
     const [liked, setLiked] = useState(like);
     const rating = (score, number) => {
         const result = [];
@@ -55,15 +44,7 @@ const Restaurant = ({ key, restaurantName, university, tags, score, number, like
     return (
         <Container>
             <Wrapper href="http://www.naver.com">
-                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
-                <h6 style={{color: "black", marginTop:"3px"}}>{university}</h6>
-                <div>
-                    {
-                        tags.map(tag => (
-                            <Tag>{tag}</Tag>
-                        ))
-                    }
-                </div>
+                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>   
                 <div>
                     {
                         rating(score, number)
