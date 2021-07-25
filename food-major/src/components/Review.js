@@ -52,7 +52,7 @@ const Tag = styled.button`
     cursor: pointer;
 `
 
-const Review = ({ id, image, content, restaurantName, tags, score }) => {
+const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood, score }) => {
     const [ modalOpen, setModalOpen ] = useState(false);
     const openModal = () => {setModalOpen(true);}
     const closeModal = () => {setModalOpen(false);}
@@ -79,17 +79,15 @@ const Review = ({ id, image, content, restaurantName, tags, score }) => {
             <ImageWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <Image src={image}></Image>
                 {
-                    hover==='on' && <Content>{content}</Content>
+                    hover==='on' && <Content>{content.length>80?content.slice(0,80)+"···":content}</Content>
                 }
             </ImageWrapper>
             <Wrapper>
-                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
+                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName.length>8?restaurantName.slice(0,6)+"···":restaurantName}</h3>
+                <h5 style={{color: "black",  margin:"0px"}}>{menuName.length>11?menuName.slice(0,10)+"···":menuName}</h5>
                 <div>
-                    {
-                        tags.map(tag => (
-                            <Tag>{tag}</Tag>
-                        ))
-                    }
+                    <Tag>{tagFood}</Tag>
+                    <Tag>{tagMood}</Tag>
                 </div>
                 <div>
                     {
