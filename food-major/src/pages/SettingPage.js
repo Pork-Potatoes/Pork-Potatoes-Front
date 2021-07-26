@@ -25,6 +25,7 @@ const Box = styled.div`
   width: 700px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px lightgrey;
   margin: 10px;
 `
 const Line = styled.div`
