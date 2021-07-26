@@ -53,7 +53,7 @@ const Tag = styled.button`
 `
 
 const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood, score }) => {
-    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ isModalOpen, setModalOpen ] = useState(false);
     const openModal = () => {setModalOpen(true);}
     const closeModal = () => {setModalOpen(false);}
     const [hover, setHover] = useState('off');
@@ -96,7 +96,7 @@ const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood
                 </div>
             </Wrapper>
         </Container>
-        <ReviewPage open={ modalOpen } close={ closeModal } header="Modal heading"></ReviewPage>
+        <ReviewPage open={ isModalOpen } close={ closeModal } header="Modal heading"></ReviewPage>
         </div>
     );
   }

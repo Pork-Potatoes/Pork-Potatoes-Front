@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaStar, FaHeart, FaRegHeart, FaRegBookmark,FaBookmark } from "react-icons/fa";
 
 const Container = styled.div`
     border-top: 1px solid lightgray;
@@ -51,7 +51,7 @@ const Restaurant = ({ key, restaurantName, score, number, like }) => {
                     }
                 </div>
             </Wrapper>
-            {liked ? <FaHeart onClick={()=>setLiked(!liked)} color="#d57358" size="22"/> : <FaRegHeart onClick={()=>setLiked(!liked)} color="#d57358" size="22"/>}
+            {liked ? <FaBookmark onClick={()=>setLiked(!liked)} color="#d57358" size="22"/> : <FaRegBookmark onClick={()=>setLiked(!liked)} color="#d57358" size="22"/>}
         </Container>
     );
   }

@@ -56,19 +56,19 @@ class WriteReviewPage extends Component {
                   <button className="close" onClick={close}></button>
                 </header>
                 <main onClick={open}>
-                <Input>
-                <Button><img src={search} alt="search" height="15px"/></Button>
-                <InputConsol placeholder="맛집 이름을 입력해 주세요"/>
-                </Input>
-                <Input>
-                <Button><img src={search} alt="search" height="15px"/></Button>
-                <InputConsol placeholder="메뉴를 입력해 주세요"/>
-                </Input>
-                <text style={{color:"rgb(17,17,17,0.48)", fontSize:"18px",marginTop:"11px"}}>선택하세요</text>
-                <Rating name="rating" defaultValue={2.5} precision="0.5" size="large" />
-                <hr size="10px" width="600vw" color="#D7D7D7" />
-                <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
-                <InputContent placeholder="최소 10자 이상 입력해주세요."></InputContent>
+                  <Input>
+                    <Button><img src={search} alt="search" height="15px"/></Button>
+                    <InputConsol placeholder="맛집 이름을 입력해 주세요"/>
+                  </Input>
+                  <Input>
+                    <Button><img src={search} alt="search" height="15px"/></Button>
+                    <InputConsol placeholder="메뉴를 입력해 주세요"/>
+                  </Input>
+                  <text style={{color:"rgb(17,17,17,0.48)", fontSize:"18px",marginTop:"11px"}}>선택하세요</text>
+                  <Rating name="rating" defaultValue={2.5} precision="0.5" size="large" />
+                  <hr size="10px" width="600vw" color="#D7D7D7" />
+                  <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
+                  <InputContent placeholder="최소 10자 이상 입력해주세요."></InputContent>
                 </main>
               </section>
             </div>
