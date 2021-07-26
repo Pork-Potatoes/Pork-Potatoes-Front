@@ -3,7 +3,6 @@ import axios from "axios";
 import https from "https"
 import styled from "styled-components";
 import Review from "../components/Review";
-import image from "../assets/reviewImg.png";
 import ImgSlide from "../components/ImgSlide";
 
 const Banner = styled.div`
@@ -104,8 +103,8 @@ class MainPage extends React.Component {
                 content={review.content}
                 restaurantName={review.restaurant.restaurantName}
                 menuName={review.menuName}
-                foodTag={review.foodTag}
-                moodTag={review.moodTag}
+                tagFood={review.tagFood}
+                tagMood={review.tagMood}
                 score={review.score}
                 url={review.url} />
             )}
@@ -120,8 +119,8 @@ class MainPage extends React.Component {
                 content={review.content}
                 restaurantName={review.restaurant.restaurantName}
                 menuName={review.menuName}
-                foodTag={review.foodTag}
-                moodTag={review.moodTag}
+                tagFood={review.tagFood}
+                tagMood={review.tagMood}
                 score={review.score}
                 url={review.url} />
             )}
