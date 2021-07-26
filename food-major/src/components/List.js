@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.a`
+    background-color: white;
     margin: 15px;
     display: flex;
     flex-direction: row;
@@ -17,10 +18,10 @@ const Image = styled.img`
     object-fit: cover;
 `
 const Content = styled.button`
-    background-color: rgba(0,0,0,0.3);
+    background-color: white;
     font-size: x-large;
     font-weight: bold;
-    color: white;
+    color: black;
     width: 300px;
     height: 150px;
     position: absolute;
@@ -30,7 +31,7 @@ const Content = styled.button`
 const List = ({ key, image, content, url }) => {
     return (
         <Container href={url}>
-            <Image src={image} alt={content}></Image>
+            {/* <Image src={image} alt={content}></Image> */}
             <Content>{content}</Content>
         </Container>
     );
