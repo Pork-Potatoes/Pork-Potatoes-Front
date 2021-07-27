@@ -59,8 +59,8 @@
 ```
 
 ### 개발 환경
-[![React](https://img.shields.io/badge/React-61DAFB?style=round-square&logo=React&logoColor=white)](https://ko.reactjs.org/)
-[![Spring](https://img.shields.io/badge/Spring-6DB33F?style=round-square&logo=Spring&logoColor=white)](https://spring.io/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=round-square&logo=React&textColor=white&logoColor=white)](https://ko.reactjs.org/)
+[![Spring](https://img.shields.io/badge/Spring-6DB33F?style=round-square&logo=Spring&textColot=white&logoColor=white)](https://spring.io/)
 
 
 ### 라이브러리
