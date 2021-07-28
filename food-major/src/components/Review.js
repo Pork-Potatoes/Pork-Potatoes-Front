@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 import ReviewPage from "../pages/ReviewPage";
+import logo from "../assets/logo.png"
 
 const Container = styled.a`
     margin: 15px;
@@ -77,7 +78,9 @@ const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood
         <div>
         <Container onClick={openModal}>
             <ImageWrapper onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                <Image src={image}></Image>
+                {
+                    image===null ? <Image src={logo}></Image> : <Image src={image}></Image>
+                }
                 {
                     hover==='on' && <Content>{content.length>80?content.slice(0,80)+"···":content}</Content>
                 }
