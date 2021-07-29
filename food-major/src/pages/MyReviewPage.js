@@ -39,7 +39,7 @@ class MyReviewPage extends React.Component {
   }
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://localhost:8080/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("http://matzipmajor.com:8080/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
     }
     catch(e){
@@ -64,7 +64,7 @@ class MyReviewPage extends React.Component {
     }
     const pagedReviews = paginate(reviews, this.state.currentPage);
     const {length: count} = reviews;
-    console.log(Object.keys(reviews));
+    console.log(reviews);
     return(
       <Contents>
         <Container>
@@ -76,8 +76,8 @@ class MyReviewPage extends React.Component {
                 content={review.content}
                 restaurantName={review.restaurant.restaurantName}
                 menuName={review.menuName}
-                foodTag={review.foodTag}
-                moodTag={review.moodTag}
+                tagFood={review.tagFood}
+                tagMood={review.tagMood}
                 score={review.score}
                 url={review.url} />
             )}
