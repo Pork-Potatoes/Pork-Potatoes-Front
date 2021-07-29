@@ -30,28 +30,6 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
 `
 
-// const HOTReview = styled.div`
-//   height: 280px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   margin-left: 150px;
-// `
-
-// const NewReview = styled.div`
-//   height: 560px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   margin-left: 150px;
-// `
-
-// const Contents = styled.div`
-//   display:flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-// `
-
 const agent = new https.Agent({
   rejectUnauthorized: false
 });
@@ -126,25 +104,6 @@ class MainPage extends React.Component {
             )}
           </Grid>
         </Wrapper>
-        {/* <HOTReview>
-          <h3 style={{marginBottom:0, marginLeft:15}}>오늘의 HOT 리뷰</h3>
-          <Contents>
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/>
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/>
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/>
-          </Contents>
-        </HOTReview>
-        <NewReview>
-          <h3 style={{marginBottom:0, marginLeft:15}}>최신 리뷰 모아보기</h3>
-          <Contents>
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-            <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식','혼밥']} score='4'/> 
-          </Contents>
-        </NewReview> */}
       </Container>
     );
   }

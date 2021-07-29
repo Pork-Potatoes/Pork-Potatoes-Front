@@ -1,6 +1,7 @@
 import React from "react";
+import https from "https"
+import axios from "axios";
 import styled from "styled-components";
-import profile from "../assets/user.png";
 
 const Contents = styled.div`
   display: flex;
@@ -25,7 +26,6 @@ const Box = styled.div`
   width: 700px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px lightgrey;
   margin: 10px;
 `
 const Line = styled.div`
@@ -40,6 +40,7 @@ const Button = styled.button`
   border: none;
   outline: none;
   font-weight: bold;
+  cursor: pointer;
 `
 const Text = styled.h4`
   margin: 0px;
@@ -51,9 +52,70 @@ const Profile = styled.img`
   margin-bottom: 15px;
   margin-right: 50px;
   margin-left: 10px;
+  object-fit: cover;
 `
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
+
 class SettingPage extends React.Component {
+  state = {
+      user: {}
+  }
+  getUser = async () => {
+    try{
+      const {data: user} = await axios.get("http://matzipmajor.com:8080/api/users/6", {httpsAgent: agent});
+      this.setState({ user });
+    }
+    catch(e){
+      console.log("getUser error");
+    }
+  }
+  componentDidMount() {
+    this.getUser();
+  }
+
+  nameChange = async () => {
+    try{
+      const response = await axios.patch("http://matzipmajor.com:8080/api/users/6", {nickname:"aa"});
+      console.log(response);
+    }
+    catch(e){
+      console.log("nameChange error");
+    }
+  }
+
+  // getCoin = async () => {
+  //   try{
+
+  //   }
+  //   catch(e){
+  //     console.log("getCoin error");
+  //   }
+  // }
+
+  // univAuth = async () => {
+  //   try{
+
+  //   }
+  //   catch(e){
+  //     console.log("univAuth error");
+  //   }
+  // }
+
+  userDelete = async () => {
+    try{
+      const response = await axios.delete("http://matzipmajor.com:8080/api/users/6", {httpsAgent: agent});
+      console.log(response);
+    }
+    catch(e){
+      console.log("userDelete error");
+    }
+  }
+  
+
   render() {
+    const user = this.state.user;
     return(
       <Contents>
         <Container>
@@ -61,7 +123,7 @@ class SettingPage extends React.Component {
           <Box>
             <h3>내 프로필</h3>
             <div style={{display:"flex", alignItems:"center"}}>
-              <Profile src={profile}></Profile>
+              <Profile src={user.profileUrl}></Profile>
               <div>
                 <Line style={{width:"530px"}}>
                   <div style={{display:"flex"}}>
@@ -72,9 +134,9 @@ class SettingPage extends React.Component {
                 <Line style={{width:"530px"}}>
                   <div style={{display:"flex"}}>
                     <Text>닉네임</Text>
-                    <Text style={{marginLeft: "80px", color:"gray"}}>돼지감자</Text>
+                    <Text style={{marginLeft: "80px", color:"gray"}}>{user.nickname}</Text>
                   </div>
-                  <Button>변경</Button>
+                  <Button onClick={()=>this.nameChange()}>변경</Button>
                 </Line>
               </div>
             </div>
@@ -84,7 +146,7 @@ class SettingPage extends React.Component {
             <Line style={{width:"680px"}}>
               <div style={{display:"flex"}}>
                 <Text>모은 코인 수</Text>
-                <Text style={{marginLeft: "80px", color:"gray"}}>360</Text>
+                <Text style={{marginLeft: "80px", color:"gray"}}>{user.coin}</Text>
               </div>
               <Button>환전</Button>
             </Line>
@@ -94,26 +156,24 @@ class SettingPage extends React.Component {
             <Line style={{width:"680px"}}>
               <div style={{display:"flex"}}>
                 <Text>이메일</Text>
-                <Text style={{marginLeft: "118px", color:"gray"}}>lhr519@naver.com</Text>
+                <Text style={{marginLeft: "118px", color:"gray"}}>{user.email}</Text>
               </div>
             </Line>
             <Line style={{width:"680px"}}>
               <div style={{display:"flex"}}>
                 <Text>학교 인증</Text>
-                <Text style={{marginLeft: "100px", color:"gray"}}>이화여자대학교</Text>
+                {
+                    user.university===null
+                    ? <Text style={{marginLeft: "100px", color:"gray"}}>학교 인증이 필요합니다</Text>
+                    : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
+                }
+                <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
               </div>
               <Button>인증</Button>
             </Line>
             <Line style={{width:"680px"}}>
-              <div style={{display:"flex"}}>
-                <Text>비밀번호 변경</Text>
-                <Text style={{marginLeft: "72px", color:"gray"}}>a********</Text>
-              </div>
-              <Button>변경</Button>
-            </Line>
-            <Line style={{width:"680px"}}>
               <Text>회원 탈퇴</Text>
-              <Button>탈퇴</Button>
+              <Button onClick={() => this.userDelete()}>탈퇴</Button>
             </Line>
           </Box>
         </Container>
