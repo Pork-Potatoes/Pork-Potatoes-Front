@@ -31,14 +31,34 @@ const InputContent = styled.input`
     outline: none;
     background-color: #F4F4F4;
     width: 35vw;
-    height: 150px;
+    height: 30vh;
     margin-top:16px;
 ` 
 const Button = styled.button`
     background-color: white;
     border: none;
     width: 24px;
-    height: 24px
+    height: 24px;
+`
+
+const UploadButton = styled.button`
+  width:35vw;
+  height:8vh;
+  margin-top: 10px;
+  background-color: white;
+  border: dashed 1px #999999;
+  text-align: center;
+`
+
+const RegisterButton = styled.button`
+  width:25vw;
+  height:8vh;
+  margin-top: 10px;
+  background-color: white;
+  border:solid 1px #BABABA;
+  border-radius: 32px;
+  text-align: center;
+  color:#F06D58;
 `
 
 
@@ -69,6 +89,8 @@ class WriteReviewPage extends Component {
                   <hr size="10px" width="600vw" color="#D7D7D7" />
                   <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
                   <InputContent placeholder="최소 10자 이상 입력해주세요."></InputContent>
+                  <UploadButton>사진/동영상 첨부하기</UploadButton>
+                  <RegisterButton>리뷰 등록</RegisterButton>
                 </main>
               </section>
             </div>

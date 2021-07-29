@@ -8,6 +8,7 @@ import image from "../assets/reviewImg.png";
 import NewRestaurant from '../components/NewRestaurant';
 import Sort from '../components/Sort.js';
 import axios from 'axios';
+import https from "https";
 import {useLocation} from 'react-router';
 
 const Filtering = styled.div`
@@ -41,6 +42,7 @@ const TagButton = styled.button`
   background: #ED6C54;
   color:white;
   font-size: 20px;
+  text-align: center;
   height: 52px;
   margin-left:8px;
   margin-right:8px;
@@ -108,10 +110,37 @@ const Contents = styled.div`
   padding: 20px;
 `
 
-const SearchPage = () => {
-  const tags = ['비건', '연예인 맛집']
-  const location=useLocation();
-  const inputSearch=location.state.inputSearch;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`
+
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
+
+class SearchPage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      reviews: []
+    }
+  }
+  getReviews = async () => {
+    try{
+      const {data: reviews} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/recent", {httpsAgent: agent});
+      this.setState({ reviews });
+    }
+    catch(e){
+      console.log("getReviews error");
+    }
+  }
+  componentDidMount() {
+    this.getReviews();
+  }
+  render(){
+  const inputSearch = this.props.location.state.inputSearch;
+  const { reviews} = this.state;
   return (
     <div>
     <Filtering>
@@ -135,10 +164,10 @@ const SearchPage = () => {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="true"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="true"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
         </Contents>
       </SearchRestaurant>
       <SearchReview>
@@ -147,18 +176,24 @@ const SearchPage = () => {
           <Text>리뷰</Text>
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
-        <Contents>
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-          <Review image={image} menuName="떡볶이" content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['분식', '연예인 맛집']} score='4'/> 
-        </Contents>
+        <Grid>
+            {Object.values(reviews).map((review) =>
+              <Review key={review.id}
+                image={review.filePath}
+                content={review.content}
+                restaurantName={review.restaurant.restaurantName}
+                menuName={review.menuName}
+                tagFood={review.tagFood}
+                tagMood={review.tagMood}
+                score={review.score}
+                url={review.url} />
+            )}
+          </Grid>
       </SearchReview>
     </Main>
     </div>
   );
+  }
 };
 
 export default SearchPage;

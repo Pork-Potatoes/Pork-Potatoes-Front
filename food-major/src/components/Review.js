@@ -52,7 +52,7 @@ const Tag = styled.button`
     cursor: pointer;
 `
 
-const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood, score }) => {
+const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood, score  }) => {
     const [ isModalOpen, setModalOpen ] = useState(false);
     const openModal = () => {setModalOpen(true);}
     const closeModal = () => {setModalOpen(false);}
@@ -85,6 +85,7 @@ const Review = ({ id, image, content, restaurantName, menuName, tagFood, tagMood
             <Wrapper>
                 <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName.length>8?restaurantName.slice(0,6)+"···":restaurantName}</h3>
                 <h5 style={{color: "black",  margin:"0px"}}>{menuName.length>11?menuName.slice(0,10)+"···":menuName}</h5>
+                
                 <div>
                     <Tag>{tagFood}</Tag>
                     <Tag>{tagMood}</Tag>

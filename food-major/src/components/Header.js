@@ -53,10 +53,8 @@ class Header extends Component{
     searchChange=(event)=>{
         let keyword=event.target.value;
         this.setState({inputSearch:keyword})
-        console.log(this.state.inputSearch)
     }
     onSearch=(event)=>{
-        console.log('search')
         this.props.history.push({
             pathname:'/searchPage',
             state:{inputSearch:this.state.inputSearch}
