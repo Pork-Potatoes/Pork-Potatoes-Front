@@ -12,11 +12,6 @@ const Container = styled.a`
     height: 150px;
     text-decoration: none;
 `
-const Image = styled.img`
-    width: 300px;
-    height: 150px;
-    object-fit: cover;
-`
 const Content = styled.button`
     background-color: white;
     font-size: x-large;
@@ -31,7 +26,6 @@ const Content = styled.button`
 const List = ({ key, image, content, url }) => {
     return (
         <Container href={url}>
-            {/* <Image src={image} alt={content}></Image> */}
             <Content>{content}</Content>
         </Container>
     );
