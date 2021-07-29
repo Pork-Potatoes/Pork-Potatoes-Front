@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 import ReviewPage from "../pages/ReviewPage";
-import logo from "../assets/logo.png"
+import logo from "../assets/icon.png"
 
 const Container = styled.a`
     margin: 15px;
@@ -23,6 +23,7 @@ const Image = styled.img`
     width: 160px;
     height: 130px;
     position: absolute;
+    object-fit: cover;
 `
 const Content = styled.button`
     background-color: rgba(0,0,0,0.5);
