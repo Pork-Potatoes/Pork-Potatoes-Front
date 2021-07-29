@@ -1,5 +1,5 @@
 import { Restaurant } from '@material-ui/icons';
-import React from 'react';
+import React,{useState} from 'react';
 import styled from "styled-components";
 import restaurantIcon from "../assets/restaurantIcon.png";
 import reviewIcon from "../assets/reviewIcon.png";
@@ -7,6 +7,8 @@ import Review from "../components/Review";
 import image from "../assets/reviewImg.png";
 import NewRestaurant from '../components/NewRestaurant';
 import Sort from '../components/Sort.js';
+import axios from 'axios';
+import {useLocation} from 'react-router';
 
 const Filtering = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ const Filtering = styled.div`
   position: fixed;
   background-color: white;
   box-shadow: 0px 2px 10px 0px silver;
-  z-index:100;
+  z-index:99;
 `
 
 const TagBox = styled.div`
@@ -47,6 +49,7 @@ const TagButton = styled.button`
   padding-left: 28px;
   padding-right: 28px;
   border-radius: 38px;
+  border:none;
 `
 
 const Main = styled.div`
@@ -107,6 +110,8 @@ const Contents = styled.div`
 
 const SearchPage = () => {
   const tags = ['비건', '연예인 맛집']
+  const location=useLocation();
+  const inputSearch=location.state.inputSearch;
   return (
     <div>
     <Filtering>
@@ -120,7 +125,7 @@ const SearchPage = () => {
     </Filtering>
     <Main>
       <Result>
-        <h2>떡볶이 검색결과</h2>
+        <h2>{inputSearch} 검색결과</h2>
         <Sort />
       </Result>
       <SearchRestaurant>

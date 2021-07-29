@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import https from "https"
+import https from "https";
 import styled from "styled-components";
 import Review from "../components/Review";
 import ImgSlide from "../components/ImgSlide";
@@ -66,7 +66,7 @@ class MainPage extends React.Component {
   }
   getHotReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://localhost:8080/api/reviews/today", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/today", {httpsAgent: agent});
       this.setState({ hotReviews: reviews });
     }
     catch(e){
@@ -75,7 +75,7 @@ class MainPage extends React.Component {
   }
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://localhost:8080/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
     }
     catch(e){

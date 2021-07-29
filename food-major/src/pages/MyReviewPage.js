@@ -39,7 +39,7 @@ class MyReviewPage extends React.Component {
   }
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://localhost:8080/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
     }
     catch(e){
