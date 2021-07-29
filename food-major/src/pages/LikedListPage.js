@@ -68,7 +68,6 @@ const LikedListPage = () => {
         <Grid>
           {pagedLists.map( (list) =>
             <List key={list.id}
-              image={list.image}
               content={list.content}
               url={list.url} />
           )}
