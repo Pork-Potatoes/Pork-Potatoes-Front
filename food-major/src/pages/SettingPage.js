@@ -2,13 +2,15 @@ import React from "react";
 import https from "https"
 import axios from "axios";
 import styled from "styled-components";
+import NameChangeModal from "../components/Modals/NameChangeModal"
+import UserDeleteModal from "../components/Modals/UserDeleteModal"
 
 const Contents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 2400px;
 `
 const Container = styled.div`
   display: flex;
@@ -33,14 +35,17 @@ const Line = styled.div`
   height: 30px;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 3px;
 `
 const Button = styled.button`
   background: transparent;
   color: #d57358;
   border: none;
   outline: none;
-  font-weight: bold;
   cursor: pointer;
+  :hover{
+    font-weight: bold;
+  }
 `
 const Text = styled.h4`
   margin: 0px;
@@ -53,6 +58,7 @@ const Profile = styled.img`
   margin-right: 50px;
   margin-left: 10px;
   object-fit: cover;
+  border: 0.5px solid #e0e0e0;
 `
 const agent = new https.Agent({
   rejectUnauthorized: false
@@ -60,11 +66,13 @@ const agent = new https.Agent({
 
 class SettingPage extends React.Component {
   state = {
-      user: {}
+      user: {},
+      nameChangeOpen: false,
+      userDeleteOpen: false
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("http://matzipmajor.com:8080/api/users/6", {httpsAgent: agent});
+      const {data: user} = await axios.get("http://matzipmajor.com:8080/api/users/1", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -74,48 +82,24 @@ class SettingPage extends React.Component {
   componentDidMount() {
     this.getUser();
   }
-
-  nameChange = async () => {
-    try{
-      const response = await axios.patch("http://matzipmajor.com:8080/api/users/6", {nickname:"aa"});
-      console.log(response);
-    }
-    catch(e){
-      console.log("nameChange error");
-    }
+  componentDidUpdate() {
+    this.getUser();
   }
-
-  // getCoin = async () => {
-  //   try{
-
-  //   }
-  //   catch(e){
-  //     console.log("getCoin error");
-  //   }
-  // }
-
-  // univAuth = async () => {
-  //   try{
-
-  //   }
-  //   catch(e){
-  //     console.log("univAuth error");
-  //   }
-  // }
-
-  userDelete = async () => {
-    try{
-      const response = await axios.delete("http://matzipmajor.com:8080/api/users/6", {httpsAgent: agent});
-      console.log(response);
-    }
-    catch(e){
-      console.log("userDelete error");
-    }
-  }
-  
 
   render() {
     const user = this.state.user;
+    const openNameChangeModal = () => {
+      this.setState({nameChangeOpen: true});
+    }
+    const closeNameChangeModal = () => {
+      this.setState({nameChangeOpen: false});
+    }
+    const openUserDeleteModal = () => {
+      this.setState({userDeleteOpen: true});
+    }
+    const closeUserDeleteModal = () => {
+      this.setState({userDeleteOpen: false});
+    }
     return(
       <Contents>
         <Container>
@@ -136,7 +120,7 @@ class SettingPage extends React.Component {
                     <Text>닉네임</Text>
                     <Text style={{marginLeft: "80px", color:"gray"}}>{user.nickname}</Text>
                   </div>
-                  <Button onClick={()=>this.nameChange()}>변경</Button>
+                  <Button onClick={ openNameChangeModal }>변경</Button>
                 </Line>
               </div>
             </div>
@@ -173,9 +157,11 @@ class SettingPage extends React.Component {
             </Line>
             <Line style={{width:"680px"}}>
               <Text>회원 탈퇴</Text>
-              <Button onClick={() => this.userDelete()}>탈퇴</Button>
+              <Button onClick={ openUserDeleteModal }>탈퇴</Button>
             </Line>
           </Box>
+          <NameChangeModal open={ this.state.nameChangeOpen } close={ closeNameChangeModal }></NameChangeModal>
+          <UserDeleteModal open={ this.state.userDeleteOpen } close={ closeUserDeleteModal }></UserDeleteModal>
         </Container>
       </Contents>
     );
