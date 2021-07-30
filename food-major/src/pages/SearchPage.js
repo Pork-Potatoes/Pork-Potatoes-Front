@@ -1,11 +1,15 @@
 import { Restaurant } from '@material-ui/icons';
-import React from 'react';
+import React,{useState} from 'react';
 import styled from "styled-components";
 import restaurantIcon from "../assets/restaurantIcon.png";
 import reviewIcon from "../assets/reviewIcon.png";
 import Review from "../components/Review";
 import image from "../assets/reviewImg.png";
 import NewRestaurant from '../components/NewRestaurant';
+import Sort from '../components/Sort.js';
+import axios from 'axios';
+import https from "https";
+
 
 const Filtering = styled.div`
   display: flex;
@@ -17,6 +21,7 @@ const Filtering = styled.div`
   position: fixed;
   background-color: white;
   box-shadow: 0px 2px 10px 0px silver;
+  z-index:99;
 `
 
 const TagBox = styled.div`
@@ -37,6 +42,7 @@ const TagButton = styled.button`
   background: #ED6C54;
   color:white;
   font-size: 20px;
+  text-align: center;
   height: 52px;
   margin-left:8px;
   margin-right:8px;
@@ -45,6 +51,7 @@ const TagButton = styled.button`
   padding-left: 28px;
   padding-right: 28px;
   border-radius: 38px;
+  border:none;
 `
 
 const Main = styled.div`
@@ -60,6 +67,8 @@ const Main = styled.div`
 const Result = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
@@ -101,9 +110,44 @@ const Contents = styled.div`
   padding: 20px;
 `
 
-const SearchPage = () => {
-  const tags = ['비건', '연예인 맛집']
-  return (
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`
+
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
+
+class SearchPage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      reviews: []
+    }
+  }
+  getReviews = async () => {
+    try{
+      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
+      this.setState({ reviews });
+    }
+    catch(e){
+      console.log("getReviews error");
+    }
+  }
+  componentDidMount() {
+    this.getReviews();
+  }
+
+  render(){
+  const inputSearch = this.props.location.state.inputSearch;
+  const filteredReviews=this.state.reviews.filter((review)=>{
+    if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
+    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())){
+      return review
+      }
+  });
+  return ( 
     <div>
     <Filtering>
       <TagBox>
@@ -116,7 +160,8 @@ const SearchPage = () => {
     </Filtering>
     <Main>
       <Result>
-        <h2>떡볶이 검색결과</h2>
+        <h2>{inputSearch} 검색결과</h2>
+        <Sort />
       </Result>
       <SearchRestaurant>
         <div>
@@ -125,10 +170,10 @@ const SearchPage = () => {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="true"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={tags} score='4' number='12' like="true"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
+        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
         </Contents>
       </SearchRestaurant>
       <SearchReview>
@@ -137,18 +182,26 @@ const SearchPage = () => {
           <Text>리뷰</Text>
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
-        <Contents>
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-        </Contents>
+        <Grid>
+            {Object.values(filteredReviews).map((review) =>
+              <Review reviewNum={review.reviewNum}
+                image={review.filePath}
+                content={review.content}
+                restaurantName={review.restaurant.restaurantName}
+                menuName={review.menuName}
+                tagFood={review.tagFood}
+                tagMood={review.tagMood}
+                score={review.score}
+                createdDate={review.createdDate}
+                likedCnt={review.likedCnt}
+                />
+            )}
+          </Grid>
       </SearchReview>
     </Main>
     </div>
   );
+  }
 };
 
 export default SearchPage;

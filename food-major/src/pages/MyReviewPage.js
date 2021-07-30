@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import _ from 'lodash'; 
+import _ from 'lodash';
 import styled from "styled-components";
 import https from "https"
 import Review from "../components/Review";

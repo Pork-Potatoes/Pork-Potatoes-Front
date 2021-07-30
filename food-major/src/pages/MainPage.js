@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import https from "https"
+import https from "https";
 import styled from "styled-components";
 import Review from "../components/Review";
 import ImgSlide from "../components/ImgSlide";
