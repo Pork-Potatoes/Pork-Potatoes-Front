@@ -31,12 +31,12 @@ const DetailPage = () => {
       <NewReview>
         <h3 style={{marginBottom:0, marginLeft:15}}>최신 리뷰</h3>
             <Contents>
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
-              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
+              <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건']} score='4'/> 
             </Contents>
       </NewReview>
     </div>

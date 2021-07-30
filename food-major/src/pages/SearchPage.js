@@ -138,12 +138,12 @@ const SearchPage = () => {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
-          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
+          <Review image={image} content="이곳에 리뷰 내용이 들어갑니다" restaurantName="산타비" menuName="차돌떡볶이" university="이대" tags={['TV 방영', '비건', '연예인 맛집']} score='4'/> 
         </Contents>
       </SearchReview>
     </Main>
