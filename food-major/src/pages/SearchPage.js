@@ -9,7 +9,7 @@ import NewRestaurant from '../components/NewRestaurant';
 import Sort from '../components/Sort.js';
 import axios from 'axios';
 import https from "https";
-import {useLocation} from 'react-router';
+
 
 const Filtering = styled.div`
   display: flex;
@@ -128,7 +128,7 @@ class SearchPage extends React.Component {
   }
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
     }
     catch(e){
@@ -138,20 +138,16 @@ class SearchPage extends React.Component {
   componentDidMount() {
     this.getReviews();
   }
+
   render(){
   const inputSearch = this.props.location.state.inputSearch;
   const filteredReviews=this.state.reviews.filter((review)=>{
-    console.log(review.restaurant.restaurantName)
-    console.log(JSON.stringify(Object.values({inputSearch})))
-    console.log(Object.values({inputSearch}).toString())
     if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
     || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())){
       return review
       }
   });
-  console.log('filter review 보여주기')
-  console.log(filteredReviews)
-  return (
+  return ( 
     <div>
     <Filtering>
       <TagBox>
@@ -188,7 +184,7 @@ class SearchPage extends React.Component {
         </div>
         <Grid>
             {Object.values(filteredReviews).map((review) =>
-              <Review key={review.id}
+              <Review reviewNum={review.reviewNum}
                 image={review.filePath}
                 content={review.content}
                 restaurantName={review.restaurant.restaurantName}
@@ -196,7 +192,9 @@ class SearchPage extends React.Component {
                 tagFood={review.tagFood}
                 tagMood={review.tagMood}
                 score={review.score}
-                url={review.url} />
+                createdDate={review.createdDate}
+                likedCnt={review.likedCnt}
+                />
             )}
           </Grid>
       </SearchReview>

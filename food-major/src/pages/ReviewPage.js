@@ -6,6 +6,9 @@ import ReactRoundedImage from "react-rounded-image";
 import userImg from '../assets/user.png'
 import { FaRegHeart,FaRegBookmark } from "react-icons/fa";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
+import axios from 'axios';
+import https from "https";
+import { create } from "domain";
 
 
 const Profile = styled.div`
@@ -29,7 +32,6 @@ const Profile2 = styled.div`
   margin-left: 40px;
 `
 
-
 const InputContent = styled.div`
     text-align: left;
     font-size: 13px;
@@ -38,7 +40,7 @@ const InputContent = styled.div`
     outline: none;
     background-color: #F4F4F4;
     width: 35vw;
-    height: 150px;
+    min-height: 140px;
     margin-top:16px;
 ` 
 
@@ -55,6 +57,7 @@ const Button = styled.button`
   padding:10px;
   margin:5px;
   font-size: 11px;
+  text-align: center;
   border-radius: 23px;
   background-color: white;
 `
@@ -70,7 +73,6 @@ const ImageWrapper = styled.div`
 `
 
 const Image = styled.image`
-  background-color: lavender;
   height: 10vh;
   width:10vh;
   margin:7px;
@@ -104,9 +106,10 @@ class ReviewPage extends Component {
     });
   }
 
+
   render() {
-    const { open, close ,restaurant,menuName,user,content,score} = this.props;
-    
+    const { open, close ,reviewNum,restaurantName,menuName,content,score,createdDate,image,likedCnt} = this.props;
+
       return (
         <>
           {open ? (  
@@ -123,28 +126,32 @@ class ReviewPage extends Component {
                     ></ReactRoundedImage>
                     <Profile2>
                       <text>익명</text>
-                      <text>시간</text>
+                      <text>{createdDate}</text>
                     </Profile2>
                   </Profile>
-                  <InputContent>내용</InputContent>
+                  <InputContent>
+                    <h1>{restaurantName}</h1>
+                    <h3>{menuName}</h3>
+                    <h4>{score}점</h4>
+                    <text>{content}</text>
+                  </InputContent>
                   <ButtonWrapper>
                     {this.state.LikeButtonClicked ?
-                    <Button style={{border:'solid 1px #F44428'}} onClick={this.clickLike}><FaRegHeart style={{color:'#F44428',paddingRight:'7px'}}/>좋아요</Button>:
-                    <Button style={{border:'solid 1px black'}} onClick={this.clickLike}><FaRegHeart style={{color:'black',paddingRight:'7px'}}/>좋아요</Button>
+                    <Button style={{border:'solid 1px #F44428'}} onClick={this.clickLike}><FaRegHeart style={{color:'#F44428',paddingRight:'7px'}}/>좋아요 ({likedCnt})</Button>:
+                    <Button style={{border:'solid 1px black'}} onClick={this.clickLike}><FaRegHeart style={{color:'black',paddingRight:'7px'}}/>좋아요 ({likedCnt})</Button>
                     }
                     {this.state.ScrapButtonClicked ?
                     <Button style={{border:'solid 1px #F44428'}} onClick={this.clickScrap}><FaRegBookmark style={{color:'#F44428',paddingRight:'7px'}}/>스크랩</Button>:
                     <Button style={{border:'solid 1px black'}} onClick={this.clickScrap}><FaRegBookmark style={{color:'black',paddingRight:'7px'}}/>스크랩</Button>
                     }
-                    <Button style={{border:'solid 1px black'}}><HiOutlineSpeakerphone style={{paddingRight:'7px'}}/>신고</Button>
+                    <Button style={{border:'solid 1px black'}}><HiOutlineSpeakerphone style={{paddingRight:'7px', height:'15px'}}/>신고</Button>
                   </ButtonWrapper>
-                  <ImageWrapper>
-                    <Image />
-                    <Image />
-                    <Image />
-                    <Image />
-                    <Image />
-                  </ImageWrapper>
+                  {image===null ? null : 
+                    <ImageWrapper>
+                      <Image src={image}></Image>
+                    </ImageWrapper>
+                  }
+
                 </main>
               </section>
             </div>
