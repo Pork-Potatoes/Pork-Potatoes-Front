@@ -44,7 +44,7 @@ class MainPage extends React.Component {
   }
   getHotReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/today", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/today", {httpsAgent: agent});
       this.setState({ hotReviews: reviews });
     }
     catch(e){
@@ -53,7 +53,7 @@ class MainPage extends React.Component {
   }
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
     }
     catch(e){

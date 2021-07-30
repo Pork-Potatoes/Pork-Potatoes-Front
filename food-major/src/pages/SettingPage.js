@@ -72,7 +72,7 @@ class SettingPage extends React.Component {
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("http://matzipmajor.com:8080/api/users/1", {httpsAgent: agent});
+      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/1", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
