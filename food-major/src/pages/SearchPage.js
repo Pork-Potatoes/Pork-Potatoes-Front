@@ -36,12 +36,10 @@ const TagBox = styled.div`
 const TagButton = styled.button`
   background: #ED6C54;
   color:white;
-  font-size: 20px;
-  height: 52px;
+  font-size: 1rem;
+  height: 48px;
   margin-left:8px;
   margin-right:8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-left: 28px;
   padding-right: 28px;
   border-radius: 38px;
@@ -88,8 +86,9 @@ const SearchReview = styled.div`
 `
 
 const Text = styled.text`
-  font-size: 40px;
+  font-size: 2.5rem;
   padding-left: 10px;
+  font-weight: bold;
 `
 
 const Contents = styled.div`
@@ -120,7 +119,7 @@ const SearchPage = () => {
       </Result>
       <SearchRestaurant>
         <div>
-          <img src={restaurantIcon} alt="restaurant" height="40px" width="40px"/>
+          <img src={restaurantIcon} alt="restaurant" height="40rem" width="40rem"/>
           <Text>식당</Text>
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
@@ -133,7 +132,7 @@ const SearchPage = () => {
       </SearchRestaurant>
       <SearchReview>
         <div>
-          <img src={reviewIcon} alt="review" height="40px" width="40px"/>
+          <img src={reviewIcon} alt="review" height="40rem" width="40rem"/>
           <Text>리뷰</Text>
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
