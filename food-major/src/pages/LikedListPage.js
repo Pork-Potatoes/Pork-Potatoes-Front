@@ -13,7 +13,7 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 2400px;
 `
 const Container = styled.div`
   display: flex;
@@ -68,7 +68,6 @@ const LikedListPage = () => {
         <Grid>
           {pagedLists.map( (list) =>
             <List key={list.id}
-              image={list.image}
               content={list.content}
               url={list.url} />
           )}

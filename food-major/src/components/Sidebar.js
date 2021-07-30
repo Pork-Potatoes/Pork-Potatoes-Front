@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Side = styled.div`
-  display: flex;
+  display: inline-block;
   border-right: 1px solid #e0e0e0;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 20%;
+  width: 300px;
 `
 
 const Menu = styled.div`
