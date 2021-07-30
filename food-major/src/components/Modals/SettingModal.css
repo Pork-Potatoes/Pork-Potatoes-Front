@@ -1,0 +1,43 @@
+.modal{
+    display: inline-block;
+    background-color:white;
+	position:absolute;
+    vertical-align: middle;
+    text-align: center;
+	height: auto;
+	width: 100vh;
+    border-radius: 10px;
+    top:50%;
+    left: 30%;
+    box-shadow : rgba(0,0,0,0.3) 0 0 0 9999px;
+    z-index: 100;
+}
+.modal > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+.modal > section button {
+    color: gray;
+    background-color: white;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    margin: 20px;
+}
+button:hover{
+    font-weight: bold;
+}
+.modal > section input {
+    border: none;
+    outline: none;
+    text-align: center;
+    height: 15px;
+}
+.modal.openModal {
+    display: flex;
+    align-items: center;
+}
