@@ -140,7 +140,17 @@ class SearchPage extends React.Component {
   }
   render(){
   const inputSearch = this.props.location.state.inputSearch;
-  const { reviews} = this.state;
+  const filteredReviews=this.state.reviews.filter((review)=>{
+    console.log(review.restaurant.restaurantName)
+    console.log(JSON.stringify(Object.values({inputSearch})))
+    console.log(Object.values({inputSearch}).toString())
+    if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
+    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())){
+      return review
+      }
+  });
+  console.log('filter review 보여주기')
+  console.log(filteredReviews)
   return (
     <div>
     <Filtering>
@@ -177,7 +187,7 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Grid>
-            {Object.values(reviews).map((review) =>
+            {Object.values(filteredReviews).map((review) =>
               <Review key={review.id}
                 image={review.filePath}
                 content={review.content}
