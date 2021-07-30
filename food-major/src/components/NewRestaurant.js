@@ -8,15 +8,15 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 450px;
+    width: 25vw;
     height: 150px;
-    padding: 10px;
+    padding-left: 20px;
     margin: 10px;
     border: solid 1px #D1D1D1;
     border-radius: 15px;
 `
 const Wrapper = styled.a`
-    width: 550px;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,7 +30,7 @@ const Tag = styled.button`
     border: none;
     height: 20px;
     border-radius: 50px;
-    margin-right: 3px;
+    margin-right: 5px;
     margin-bottom: 3px;
     cursor: pointer;
 `
@@ -70,7 +70,6 @@ const Restaurant = ({ key, restaurantName, university, tags, score, number, like
                     }
                 </div>
             </Wrapper>
-            {liked ? <FaHeart onClick={()=>setLiked(!liked)} color="#d57358" size="22"/> : <FaRegHeart onClick={()=>setLiked(!liked)} color="#d57358" size="22"/>}
         </Container>
     );
   }
