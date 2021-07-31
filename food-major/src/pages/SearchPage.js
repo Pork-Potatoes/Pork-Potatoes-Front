@@ -80,7 +80,7 @@ const SearchRestaurant = styled.div`
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
-  height: 900px;
+  height:450px;
   padding-top:10px;
 `
 
@@ -90,7 +90,7 @@ const SearchReview = styled.div`
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
-  height: 900px;
+  min-height: 900px;
   padding-top:20px;
 `
 
@@ -107,6 +107,8 @@ const Contents = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
 `
 
 const Grid = styled.div`
@@ -123,7 +125,8 @@ class SearchPage extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      restaurants: []
+      restaurants: [],
+      filteredReviews:[]
     }
   }
   getReviews = async () => {
@@ -136,27 +139,40 @@ class SearchPage extends React.Component {
       console.log("getReviews error");
     }
   }
-  componentDidMount() {
-    this.getReviews();
+  getRestaurants= async (inputSearch) => {
+    try{
+      const url="https://www.matzipmajor.com/api/search?q="+Object.values({inputSearch}).toString();
+      const {data: restaurants} = await axios.get(url, {httpsAgent: agent});
+      this.setState({ restaurants });
+    }
+    catch(e){
+      console.log("getReviews error");
+    }
   }
+
+
 
   render(){
   const inputSearch = this.props.location.state.inputSearch;
-  const filteredReviews=this.state.reviews.filter((review)=>{
+  this.state.filteredReviews=this.state.reviews.filter((review)=>{
     if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
-    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())){
+    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())
+    || review.tagFood.toLowerCase().includes(Object.values({inputSearch}).toString())
+    ){
       return review
       }
   });
+  this.getReviews();
+  this.getRestaurants(inputSearch);
   return ( 
     <div>
     <Filtering>
       <TagBox>
-        <TagButton>회식</TagButton>
-        <TagButton>혼밥</TagButton>
-        <TagButton>밥약</TagButton>
-        <TagButton>데이트</TagButton>
-        <TagButton>가족</TagButton>
+        <TagButton className='eatTogether'>회식</TagButton>
+        <TagButton className='eatAlone'>혼밥</TagButton>
+        <TagButton className='eatPromise'>밥약</TagButton>
+        <TagButton className='eatDate'>데이트</TagButton>
+        <TagButton className='eatFamily'>가족</TagButton>
       </TagBox>
     </Filtering>
     <Main>
@@ -171,12 +187,12 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-          {Object.values(filteredReviews).map((review) =>
+          {Object.values(this.state.restaurants).map((restaurant) =>
             <NewRestaurant 
-            restaurantName={review.restaurant.restaurantName} 
-            address={review.restaurant.address} 
-            score={review.restaurant.avgScore} 
-            restaurantNum={review.restaurant.restaurantNum}
+            restaurantNum={restaurant.restaurantNum}
+            restaurantName={restaurant.restaurantName} 
+            address={restaurant.address} 
+            avgScore={restaurant.avgScore} 
             />
           )}
         </Contents>
@@ -188,7 +204,7 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Grid>
-            {Object.values(filteredReviews).map((review) =>
+            {Object.values(this.state.filteredReviews).map((review) =>
               <Review reviewNum={review.reviewNum}
                 image={review.filePath}
                 content={review.content}

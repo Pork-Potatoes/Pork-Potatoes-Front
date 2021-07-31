@@ -91,7 +91,6 @@ class Review extends React.Component{
         try{
             const url="https://www.matzipmajor.com/api/reviews/"+reviewNum.toString();
             const reviewdata = await axios.get(url, {httpsAgent: agent});
-            console.log(reviewdata.data)
             this.setState({ review:reviewdata.data });
         }
         catch(e){

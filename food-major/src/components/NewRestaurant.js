@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { FaStar, FaHeart, FaRegHeart, FaRegBookmark,FaBookmark } from "react-icons/fa";
+import { render } from "@testing-library/react";
+import { withRouter } from "react-router-dom";
+import axios from 'axios';
+import https from "https";
 
 const Container = styled.div`
     border-top: 1px solid lightgray;
@@ -37,11 +41,17 @@ const Tag = styled.button`
     cursor: pointer;
 `
 
-const Restaurant = ({ key, restaurantName, score, number, like, avgScore }) => {
-    const [liked, setLiked] = useState(like);
-    const history = useHistory();
+const agent = new https.Agent({
+    rejectUnauthorized: false
+  });
 
-    const rating = (score, number) => {
+class NewRestaurant extends React.Component{
+    state={
+        restaurant:'',
+        liked:'like'
+    };
+
+    rating = (score, number) => {
         const result = [];
         for (let i = 5; i > 0; i--){
             score--;
@@ -56,19 +66,45 @@ const Restaurant = ({ key, restaurantName, score, number, like, avgScore }) => {
         return result;
     }
 
+    getRestaurant = async (restaurantNum) => {
+        try{
+            const url="https://matzipmajor.com/api/restaurants/"+restaurantNum.toString();
+            const restaurantdata = await axios.get(url, {httpsAgent: agent});
+            this.setState({ restaurant:restaurantdata.data });
+        }
+        catch(e){
+          console.log("getRestaurant error");
+        }
+      }
+
+    render(){
+        const { restaurantNum, restaurantName, number, like, avgScore }=this.props;
+        this.getRestaurant(restaurantNum);
     return (
         <Container>
-            <Wrapper onClick={()=>history.push('/detailpage')}>
+            <Wrapper onClick={()=>this.props.history.push({
+                pathname:'/detailpage',
+                state:{
+                    restaurantName:this.state.restaurant.restaurantName,
+                    address:this.state.restaurant.address,
+                    phoneNum:this.state.restaurant.phoneNum,
+                    businessHour:this.state.restaurant.businessHour,
+                    snsAccount:this.state.restaurant.snsAccount,
+                    avgScore:this.state.restaurant.avgScore,
+                }
+                    
+                })
+            }>
                 <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
                 <h2>{avgScore}</h2>
                 <div>
                     {
-                        rating(score, number)
+                        this.rating(avgScore, number)
                     }
                 </div>
             </Wrapper>
         </Container>
     );
-  }
+  }}
 
-export default Restaurant;
+export default withRouter(NewRestaurant);
