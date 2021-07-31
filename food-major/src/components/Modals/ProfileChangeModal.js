@@ -12,24 +12,28 @@ const Profile = styled.img`
   border: 0.5px solid #e0e0e0;
 `
 
-class NameChangeModal extends Component {
+class ProfileChangeModal extends Component {
     state = {
-        imageUrl: profile
+        imageUrl: profile,
+        file: null
     }
-
     processImage = (event) => {
-        const imageFile = event.target.files[0];
-        const url = URL.createObjectURL(imageFile);
-        this.setState({ imageUrl : url })
+      const imageFile = event.target.files[0];
+      const url = URL.createObjectURL(imageFile);
+      this.setState({ imageUrl : url })
+      this.setState({ file: imageFile })
     }
-    nameChange = async (event) => {
+    profileChange = async (event) => {
     event.preventDefault()
         try{
-            const response = await axios.patch("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/users/7/image", {"nickname":this.state.imageUrl});
-            response.status===200 ? alert("변경되었습니다!") : alert("다시 시도해주세요");
+          const frm = new FormData();
+          frm.append("uploadFile", this.state.file);
+          const response = await axios.patch("https://www.matzipmajor.com/api/users/7/image", frm, {headers: {'Content-Type':'multipart/form-data'}});
+          console.log(response)
+          response.status===200 ? alert("변경되었습니다!") : alert("다시 시도해주세요");
         }
         catch(e){
-            console.log("nameChange error");
+            console.log("profileChange error");
         }
     }
     render() {
@@ -46,7 +50,7 @@ class NameChangeModal extends Component {
                 </label>
                 <input type="file" accept="image/*" onChange={this.processImage} id="input-file" style={{display:"none"}}/> 
                 <div>
-                    <button onClick={this.nameChange} style={{color:"#d57358"}}>변경</button>
+                    <button onClick={this.profileChange} style={{color:"#d57358"}}>변경</button>
                     <button onClick={() => {
                         this.setState({imageUrl:profile});
                         close();
@@ -59,4 +63,4 @@ class NameChangeModal extends Component {
       );
     }
   }
-export default NameChangeModal;
+export default ProfileChangeModal;
