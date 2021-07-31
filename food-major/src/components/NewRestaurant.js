@@ -37,7 +37,7 @@ const Tag = styled.button`
     cursor: pointer;
 `
 
-const Restaurant = ({ key, restaurantName, score, number, like }) => {
+const Restaurant = ({ key, restaurantName, score, number, like, avgScore }) => {
     const [liked, setLiked] = useState(like);
     const history = useHistory();
 
@@ -60,14 +60,7 @@ const Restaurant = ({ key, restaurantName, score, number, like }) => {
         <Container>
             <Wrapper onClick={()=>history.push('/detailpage')}>
                 <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
-                <h6 style={{color: "black", marginTop:"3px"}}>{university}</h6>
-                <div>
-                    {
-                        tags.map(tag => (
-                            <Tag>{tag}</Tag>
-                        ))
-                    }
-                </div>
+                <h2>{avgScore}</h2>
                 <div>
                     {
                         rating(score, number)

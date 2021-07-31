@@ -122,7 +122,8 @@ class SearchPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      reviews: []
+      reviews: [],
+      restaurants: []
     }
   }
   getReviews = async () => {
@@ -169,10 +170,13 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="false"/>
-        <NewRestaurant restaurantName="산타비" university="이대" tags={'분식','밥약'} score='4' number='12' like="true"/>
+          {Object.values(filteredReviews).map((review) =>
+            <NewRestaurant 
+            restaurantName={review.restaurant.restaurantName} 
+            address={review.restaurant.address} 
+            score={review.restaurant.avgScore} 
+            />
+          )}
         </Contents>
       </SearchRestaurant>
       <SearchReview>
