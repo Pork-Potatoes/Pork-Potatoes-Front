@@ -130,6 +130,7 @@ class SearchPage extends React.Component {
     try{
       const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
       this.setState({ reviews });
+      window.localStorage.setItem('restaurantNum', reviews.restaurant.restaurantNum);
     }
     catch(e){
       console.log("getReviews error");
@@ -175,6 +176,7 @@ class SearchPage extends React.Component {
             restaurantName={review.restaurant.restaurantName} 
             address={review.restaurant.address} 
             score={review.restaurant.avgScore} 
+            restaurantNum={review.restaurant.restaurantNum}
             />
           )}
         </Contents>
