@@ -1,6 +1,6 @@
 import React, { Component,useState } from "react";
 import styled from "styled-components";
-import '../components/Modal.css';
+import '../components/Modals/Modal.css';
 import logo from '../assets/logo.png';
 import ReactRoundedImage from "react-rounded-image";
 import userImg from '../assets/user.png'

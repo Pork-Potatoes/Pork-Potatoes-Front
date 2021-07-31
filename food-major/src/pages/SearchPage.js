@@ -147,7 +147,9 @@ class SearchPage extends React.Component {
   const inputSearch = this.props.location.state.inputSearch;
   this.state.filteredReviews=this.state.reviews.filter((review)=>{
     if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
-    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())){
+    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())
+    || review.tagFood.toLowerCase().includes(Object.values({inputSearch}).toString())
+    ){
       return review
       }
   });
