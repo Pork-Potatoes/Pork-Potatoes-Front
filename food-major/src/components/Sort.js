@@ -17,11 +17,6 @@ const Select = styled.select`
   width: 150px;
   height: 30px;
 `
-const options = [
-    { value: '최신순', label: '최신순으로' },
-    { value: '별점순', label: '별점순으로' },
-    { value: '좋아요순', label: '인기순으로' }
-  ]
   
   const Sort = () => (
     <Line_style>

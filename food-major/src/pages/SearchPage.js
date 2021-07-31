@@ -138,9 +138,17 @@ class SearchPage extends React.Component {
       console.log("getReviews error");
     }
   }
-  componentDidMount() {
-    this.getReviews();
+  getRestaurants= async (inputSearch) => {
+    try{
+      const url="https://www.matzipmajor.com/api/search?q="+Object.values({inputSearch}).toString();
+      const {data: restaurants} = await axios.get(url, {httpsAgent: agent});
+      this.setState({ restaurants });
+    }
+    catch(e){
+      console.log("getReviews error");
+    }
   }
+
 
 
   render(){
@@ -153,6 +161,8 @@ class SearchPage extends React.Component {
       return review
       }
   });
+  this.getReviews();
+  this.getRestaurants(inputSearch);
   return ( 
     <div>
     <Filtering>
@@ -176,11 +186,12 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-          {Object.values(this.state.filteredReviews).map((review) =>
+          {Object.values(this.state.restaurants).map((restaurant) =>
             <NewRestaurant 
-            restaurantName={review.restaurant.restaurantName} 
-            address={review.restaurant.address} 
-            score={review.restaurant.avgScore} 
+            restaurantNum={restaurant.restaurantNum}
+            restaurantName={restaurant.restaurantName} 
+            address={restaurant.address} 
+            avgScore={restaurant.avgScore} 
             />
           )}
         </Contents>
