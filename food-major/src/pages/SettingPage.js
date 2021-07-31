@@ -75,7 +75,7 @@ class SettingPage extends React.Component {
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/7", {httpsAgent: agent});
+      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/3", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -141,7 +141,7 @@ class SettingPage extends React.Component {
                 <Text>모은 코인 수</Text>
                 <Text style={{marginLeft: "80px", color:"gray"}}>{user.coin}</Text>
               </div>
-              <Button>환전</Button>
+              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAVOWmMV03kvcCu2MJyEHAddREAcbIXzlMXMTHzSdejHZE0Q/viewform?usp=sf_link', '_blank')}>환전</Button>
             </Line>
           </Box>
           <Box>
