@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import NameChangeModal from "../components/Modals/NameChangeModal"
 import UserDeleteModal from "../components/Modals/UserDeleteModal"
+import ProfileChangeModal from "../components/Modals/ProfileChangeModal"
 
 const Contents = styled.div`
   display: flex;
@@ -68,11 +69,12 @@ class SettingPage extends React.Component {
   state = {
       user: {},
       nameChangeOpen: false,
-      userDeleteOpen: false
+      userDeleteOpen: false,
+      profileChangeOpen: false,
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("http://matzipmajor.com:8080/api/users/1", {httpsAgent: agent});
+      const {data: user} = await axios.get("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/users/7", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -100,6 +102,12 @@ class SettingPage extends React.Component {
     const closeUserDeleteModal = () => {
       this.setState({userDeleteOpen: false});
     }
+    const openProfileChangeModal = () => {
+      this.setState({profileChangeOpen: true});
+    }
+    const closeProfileChangeModal = () => {
+      this.setState({profileChangeOpen: false});
+    }
     return(
       <Contents>
         <Container>
@@ -113,7 +121,7 @@ class SettingPage extends React.Component {
                   <div style={{display:"flex"}}>
                     <Text>프로필 사진</Text>
                   </div>
-                  <Button>변경</Button>
+                  <Button onClick={ openProfileChangeModal }>변경</Button>
                 </Line>
                 <Line style={{width:"530px"}}>
                   <div style={{display:"flex"}}>
@@ -162,6 +170,8 @@ class SettingPage extends React.Component {
           </Box>
           <NameChangeModal open={ this.state.nameChangeOpen } close={ closeNameChangeModal }></NameChangeModal>
           <UserDeleteModal open={ this.state.userDeleteOpen } close={ closeUserDeleteModal }></UserDeleteModal>
+          <ProfileChangeModal open={ this.state.profileChangeOpen } close={ closeProfileChangeModal }></ProfileChangeModal>
+
         </Container>
       </Contents>
     );

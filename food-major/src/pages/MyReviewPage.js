@@ -64,7 +64,6 @@ class MyReviewPage extends React.Component {
     }
     const pagedReviews = paginate(reviews, this.state.currentPage);
     const {length: count} = reviews;
-    console.log(reviews);
     return(
       <Contents>
         <Container>
