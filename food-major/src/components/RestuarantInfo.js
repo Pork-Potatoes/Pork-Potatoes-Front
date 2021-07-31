@@ -56,11 +56,27 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
   useEffect(()=> {
     const container = document.getElementById('restMap');
       const options = {
-        center: new kakao.maps.LatLng(33.450701,126.570667),
+        center: new kakao.maps.LatLng(37.56113771854151,126.9464649322563),
         level: 3
       };
       const map = new kakao.maps.Map(container, options);
-  },[])
+      const geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, function (result, status) {
+            
+            if (status === kakao.maps.services.Status.OK) {
+
+                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                const marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+                map.setCenter(coords);
+                console.log(coords);
+            }
+        });
+
+    }, []);
 
   return (
       <RestInfo>
@@ -81,5 +97,4 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
   );
 };
 
-export default RestaurantInfo
-;
+export default RestaurantInfo;
