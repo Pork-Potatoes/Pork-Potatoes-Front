@@ -25,18 +25,19 @@ const Box = styled.div`
   align-items: start;
   justify-content: center;
   padding-left: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   width: 700px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  margin: 10px;
+  margin: 5px;
 `
 const Line = styled.div`
   display: flex;
   height: 30px;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 3px;
+  margin-top: 2px;
 `
 const Button = styled.button`
   background: transparent;
@@ -74,7 +75,7 @@ class SettingPage extends React.Component {
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/1", {httpsAgent: agent});
+      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/7", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -113,7 +114,7 @@ class SettingPage extends React.Component {
         <Container>
           <h1 style={{margin:"15px"}}>설정</h1>
           <Box>
-            <h3>내 프로필</h3>
+            <h3 style={{marginTop:"10px"}}>내 프로필</h3>
             <div style={{display:"flex", alignItems:"center"}}>
               <Profile src={user.profileUrl}></Profile>
               <div>
@@ -134,7 +135,7 @@ class SettingPage extends React.Component {
             </div>
           </Box>
           <Box>
-            <h3>코인</h3>
+            <h3 style={{marginTop:"10px"}}>코인</h3>
             <Line style={{width:"680px"}}>
               <div style={{display:"flex"}}>
                 <Text>모은 코인 수</Text>
@@ -144,7 +145,7 @@ class SettingPage extends React.Component {
             </Line>
           </Box>
           <Box>
-            <h3>계정</h3>
+            <h3 style={{marginTop:"10px"}}>계정</h3>
             <Line style={{width:"680px"}}>
               <div style={{display:"flex"}}>
                 <Text>이메일</Text>

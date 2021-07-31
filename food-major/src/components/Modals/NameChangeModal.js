@@ -12,7 +12,7 @@ class NameChangeModal extends Component {
   nameChange = async (event) => {
     event.preventDefault()
     try{
-      const response = await axios.patch("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/users/7/nickname", {"nickname":this.state.name});
+      const response = await axios.patch("https://www.matzipmajor.com/api/users/7/nickname", {"nickname":this.state.name});
       response.status===200 ? alert("변경되었습니다!") : alert("다시 시도해주세요");
     }
     catch(e){

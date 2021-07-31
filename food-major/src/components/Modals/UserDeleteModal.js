@@ -11,7 +11,7 @@ class UserDeleteModal extends Component {
     userDelete = async (event) => {
       event.preventDefault();
       try{
-        const response = await axios.delete("http://ec2-3-37-228-150.ap-northeast-2.compute.amazonaws.com:8080/api/users/6", {httpsAgent: agent});
+        const response = await axios.delete("https://www.matzipmajor.com/api/users/6", {httpsAgent: agent});
         response.status===200
         ? alert("[탈퇴 완료] 메인 화면으로 돌아갑니다.")
         : alert("다시 시도해주세요")
