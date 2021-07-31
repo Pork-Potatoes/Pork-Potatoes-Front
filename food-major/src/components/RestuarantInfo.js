@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 
@@ -26,21 +26,21 @@ const Info = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
   width: auto;
-  margin-top: 50px;
+  margin-top: 10px;
 `
 
 const Detail = styled.div`
-  background-color: #E5C1C8;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  justify-content: flex-start;
   width:60vw;
-  height:40vh;
+  height:20vh;
 `
 
 const Map = styled.div`
-  background-color: #C3E2DD;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,8 +48,20 @@ const Map = styled.div`
   height:40vh;
 `
 
+const { kakao } = window;
+
 const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore, scrap}) => {
   const [scraped, setScraped] = useState(scrap);
+
+  useEffect(()=> {
+    const container = document.getElementById('restMap');
+      const options = {
+        center: new kakao.maps.LatLng(33.450701,126.570667),
+        level: 3
+      };
+      const map = new kakao.maps.Map(container, options);
+  },[])
+
   return (
       <RestInfo>
         <Title>
@@ -58,14 +70,12 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
         </Title>
         <Info>
           <Detail>
-          <ul>
-            <li>주소 {address}</li>
-            <li>전화번호 {phoneNum}</li>
-            <li>웹사이트 {snsAccount}</li>
-            <li>영업시간 {businessHour}</li>
-          </ul>
+            주소: {address}<br/>
+            전화번호: {phoneNum}<br/>
+            웹사이트: {snsAccount}<br/>
+            영업시간: {businessHour}<br/>
           </Detail>
-          <Map>지도 입니다</Map>
+          <Map id='restMap'>지도입니다</Map>
         </Info>
       </RestInfo>
   );
