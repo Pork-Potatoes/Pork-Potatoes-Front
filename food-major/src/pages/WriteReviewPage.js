@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import '../components/Modal.css';
+import '../components/Modals/Modal.css';
 import logo from '../assets/logo.png';
 import search from '../assets/search.png';
 import { fontSize } from "@material-ui/system";
