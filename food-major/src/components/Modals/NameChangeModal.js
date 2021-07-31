@@ -24,7 +24,7 @@ class NameChangeModal extends Component {
       return (
         <>
           {open ? (  
-            <div className="modal">
+            <div className="settingmodal">
               <section>
                 <h3>닉네임 변경</h3>
                     <input type="text" value={this.name} onChange={this.handleChange} placeholder="새 닉네임"/>

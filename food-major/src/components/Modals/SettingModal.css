@@ -1,4 +1,4 @@
-.modal{
+.settingmodal{
     display: inline-block;
     background-color:white;
 	position: absolute;
@@ -12,15 +12,16 @@
     box-shadow : rgba(0,0,0,0.3) 0 0 0 9999px;
     z-index: 100;
 }
-.modal > section {
+.settingmodal > section {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     overflow: hidden;
     background-color: transparent;
+    animation: modal-show .3s;
 }
-.modal > section button {
+.settingmodal > section button {
     color: gray;
     background-color: white;
     border: none;
@@ -31,14 +32,14 @@
 button:hover{
     font-weight: bold;
 }
-.modal > section input {
+.settingmodal > section input {
     border: none;
     outline: none;
     text-align: center;
     height: 15px;
 }
 
-.modal > section label {
+.settingmodal > section label {
     font-weight: bolder;
     margin-top: 20px;
     padding: 6px 35px;
@@ -49,8 +50,28 @@ button:hover{
     cursor: pointer;
 }
 
-.modal.openModal {
+.settingmodal.openModal {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: modal-bg-show .3s;
+
+}
+@keyframes modal-show {
+    from {
+        opacity: 0;
+        margin-top: -50px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+@keyframes modal-bg-show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
