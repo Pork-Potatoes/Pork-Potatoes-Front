@@ -1,10 +1,11 @@
-import React from "react";
+import React,{Component,useState,props} from "react";
 import styled from "styled-components";
 
 import logo from "../assets/logo.png";
 import search from "../assets/search.png";
-
 import MyButton from "./MyButton";
+import SearchPage from "../pages/SearchPage";
+import { withRouter } from "react-router-dom";
 
 const Wrapper = styled.div`
     position: fixed;
@@ -42,18 +43,45 @@ const Button = styled.button`
 `
 
 
-function Header() {
+class Header extends Component{
+    constructor(){
+        super();
+        this.state={
+            inputSearch:null
+        };
+    } 
+    searchChange=(event)=>{
+        let keyword=event.target.value;
+        this.setState({inputSearch:keyword})
+    }
+    onSearch=(event)=>{
+        this.props.history.push({
+            pathname:'/searchPage',
+            state:{inputSearch:this.state.inputSearch}
+        })
+    }
+    enterPress=(event)=>{
+        if (event.key==='Enter'){
+            this.onSearch()
+        }
+    }
+    render(){
     return (
         <Wrapper>
             <a href="/"><img src={logo} alt="logo" height="40px" style={{marginLeft: "30px"}}/></a>
             <Input>
-                <InputConsol placeholder="식당 혹은 메뉴"/>
-                <Button><img src={search} alt="search" height="15px"/></Button>
+                <InputConsol placeholder="식당 혹은 메뉴"
+                onChange={(e)=>this.searchChange(e)} onKeyPress={(e)=>this.enterPress(e)}
+                />
+                <Button><img src={search} alt="search" height="15px"
+                onClick={this.onSearch}
+                /></Button>
             </Input>
             <a href="/mypage/myreview"> 임시 마이페이지 버튼</a>
             <MyButton />
         </Wrapper>
     );
+    }
 }
 
-export default Header;
+export default withRouter(Header);

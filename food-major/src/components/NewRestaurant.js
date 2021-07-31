@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaStar, FaHeart, FaRegHeart, FaRegBookmark,FaBookmark } from "react-icons/fa";
 
 const Container = styled.div`
     border-top: 1px solid lightgray;
@@ -23,6 +23,7 @@ const Wrapper = styled.a`
     justify-content: space-between;
     text-decoration: none;
 `
+
 const Tag = styled.button`
     background-color: #d57358;
     font-size: xx-small;
@@ -36,7 +37,7 @@ const Tag = styled.button`
     cursor: pointer;
 `
 
-const Restaurant = ({ key, restaurantName, university, tags, score, number, like }) => {
+const Restaurant = ({ key, restaurantName, score, number, like }) => {
     const [liked, setLiked] = useState(like);
     const history = useHistory();
 
