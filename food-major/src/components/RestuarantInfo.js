@@ -21,15 +21,6 @@ const Title = styled.div`
   margin-top: 50px;
 `
 
-const Announcement = styled.div`
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  background-color: rgba( 237, 108, 84 );
-  height: 43px;
-  width: auto;
-`
-
 const Info = styled.div`
   display: flex;
   flex-direction: row;
@@ -65,9 +56,6 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
           <h2>{restaurantName} {avgScore}</h2>
           {scraped ? <BsBookmark onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/> : <BsFillBookmarkFill onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/>}
         </Title>
-        <Announcement>
-          <p style={{paddingLeft:'30px'}}>{notice}</p>
-        </Announcement>
         <Info>
           <Detail>
           <ul>
