@@ -26,7 +26,7 @@ class UserDeleteModal extends Component {
       return (
         <>
           {open ? (  
-            <div className="modal">
+            <div className="settingmodal">
               <section>
                 <h3>탈퇴하시겠습니까?</h3>
                 <div>

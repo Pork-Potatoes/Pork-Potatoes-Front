@@ -41,7 +41,7 @@ class ProfileChangeModal extends Component {
       return (
         <>
           {open ? (  
-            <div className="modal">
+            <div className="settingmodal">
               <section>
                 <h3>프로필 사진 변경</h3>
                 <Profile src={this.state.imageUrl}></Profile>
