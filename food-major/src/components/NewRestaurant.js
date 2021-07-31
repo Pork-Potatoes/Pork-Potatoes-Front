@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 
@@ -37,6 +38,8 @@ const Tag = styled.button`
 
 const Restaurant = ({ key, restaurantName, university, tags, score, number, like }) => {
     const [liked, setLiked] = useState(like);
+    const history = useHistory();
+
     const rating = (score, number) => {
         const result = [];
         for (let i = 5; i > 0; i--){
@@ -54,7 +57,7 @@ const Restaurant = ({ key, restaurantName, university, tags, score, number, like
 
     return (
         <Container>
-            <Wrapper href="http://www.naver.com">
+            <Wrapper onClick={()=>history.push('/detailpage')}>
                 <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
                 <h6 style={{color: "black", marginTop:"3px"}}>{university}</h6>
                 <div>
