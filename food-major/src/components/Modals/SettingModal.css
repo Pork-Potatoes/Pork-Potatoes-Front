@@ -37,6 +37,18 @@ button:hover{
     text-align: center;
     height: 15px;
 }
+
+.modal > section label {
+    font-weight: bolder;
+    margin-top: 20px;
+    padding: 6px 35px;
+    color: white;
+    background-color: #d57358;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
 .modal.openModal {
     display: flex;
     align-items: center;
