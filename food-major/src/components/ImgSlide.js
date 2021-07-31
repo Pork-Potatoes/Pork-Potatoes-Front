@@ -15,7 +15,7 @@ function ImgSlide(props)
         },
         {
             name: "드림님이 뽑은 이색 맛집 TOP5",
-            Image: "https://cdn.pixabay.com/photo/2018/03/07/10/09/food-3205654_960_720.jpg"
+            Image: "https://cdn.pixabay.com/photo/2019/11/23/15/26/salmon-4647406_960_720.jpg"
         }
     ]
 
