@@ -38,6 +38,7 @@ const Detail = styled.div`
   justify-content: flex-start;
   width:60vw;
   height:20vh;
+  line-height: 3;
 `
 
 const Map = styled.div`
@@ -86,10 +87,10 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
         </Title>
         <Info>
           <Detail>
-            주소: {address}<br/>
-            전화번호: {phoneNum}<br/>
-            웹사이트: {snsAccount}<br/>
-            영업시간: {businessHour}<br/>
+            주소 : {address}<br/>
+            전화번호 : {phoneNum}<br/>
+            웹사이트 : {snsAccount}<br/>
+            영업시간 : {businessHour}<br/>
           </Detail>
           <Map id='restMap'>지도입니다</Map>
         </Info>
