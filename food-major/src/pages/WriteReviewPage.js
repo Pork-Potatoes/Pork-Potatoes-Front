@@ -8,6 +8,7 @@ import Rating from '@material-ui/lab/Rating';
 import ReactStars from "react-rating-stars-component";
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
+import https from "https";
 
 const Input = styled.div`
     display:flex;
@@ -61,17 +62,16 @@ const RegisterButton = styled.button`
   text-align: center;
   color:#F06D58;
 `
-
-
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
 
 function WriteReviewPage (props) {
   const {open,closeModal}=props;
-  console.log(closeModal)
   const [inputRestaurant,setInputRestaurant]=useState('');
   const [inputMenu,setInputMenu]=useState('');
   const [inputContent,setInputContent]=useState('');
   const [score,setScore]=useState(5);
-  const curTime=new Date().toLocaleString();
 
   const inputRestaurantChange=(event)=>{
     const keyword=event.target.value;
@@ -86,29 +86,66 @@ function WriteReviewPage (props) {
     setInputContent({keyword})
   }
   const ratingChanged = (newRating) => {
-    console.log(newRating);
     setScore({newRating});
   };
   const addReview = async () => {
+    const restaurantObject=getRestaurant();
+    const userObject=getUser();
+    console.log(typeof(restaurantObject))
+    console.log(typeof(userObject))
+    console.log(typeof(Object.values(inputContent).toString()))
+    console.log(typeof(parseFloat(Object.values(score).toString())))
+    console.log(typeof(true))
+    console.log(typeof(Object.values(inputMenu).toString()))
+    console.log(typeof(new Date()))
+
     try{
       const response = await axios.post('https://www.matzipmajor.com/api/reviews',
       {
-        restaurant:inputRestaurant,
-        user:7,
-        content:inputContent,
-        score:score,
-        anonymousFlag:true,
-        menuName:inputMenu,
-        tagFood:'분식',
-        tagMood:'회식',
-        createDate:curTime
+        "restaurant":restaurantObject,
+        "user":userObject,
+        "content":Object.values(inputContent).toString(),
+        "score":parseFloat(Object.values(score).toString()),
+        "anonymousFlag":true,
+        "menuName":Object.values(inputMenu).toString(),
+        "tagFood":'분식',
+        "tagMood":'회식',
+        "createdDate":new Date()
+      
       });
+      console.log(response)
       response.status===200 ? alert('리뷰 업로드 완료!') : alert('다시 시도해주세요');
     }
     catch(e){
       console.log('reviewUpload error');
     }
   }
+
+  const getRestaurant= async () => {
+    try{
+      const url="https://www.matzipmajor.com/api/search?q="+Object.values(inputRestaurant).toString();
+      const restaurantdata = await axios.get(url, {httpsAgent: agent});
+      const resNum = restaurantdata.data[0].restaurantNum;
+      const url2="https://www.matzipmajor.com/api/restaurants/"+resNum;
+      const restaurantObject = await axios.get(url2, {httpsAgent: agent});
+      return restaurantObject.data;
+    }
+    catch(e){
+      console.log("getRestaurant error");
+    }
+  }
+
+  const getUser= async () => {
+    try{
+      const url="https://www.matzipmajor.com/api/users/"+1;
+      const userObject = await axios.get(url, {httpsAgent: agent});
+      return userObject.data;
+    }
+    catch(e){
+      console.log("getUser error");
+    }
+  }
+
 
   return (
     <>
@@ -117,7 +154,7 @@ function WriteReviewPage (props) {
           <section>
             <header>
               <img src={logo} height='40px'></img>
-              <button className="close" onClick={()=>closeModal}></button>
+              <button className="close" onClick={closeModal}></button>
             </header>
             <main>
               <Input>

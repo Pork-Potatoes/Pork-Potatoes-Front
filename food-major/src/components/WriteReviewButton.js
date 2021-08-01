@@ -5,8 +5,6 @@ import WriteReviewPage from "../pages/WriteReviewPage";
 
 const WriteReviewButton = () =>{
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
-    const openModal = () => {setModalIsOpen(true);}
-    const closeModal = () => {setModalIsOpen(false);}
 
     return(
     <>
@@ -18,11 +16,11 @@ const WriteReviewButton = () =>{
             height: '63px',
             cursor: 'pointer'
         }}
-        onClick={openModal}>
+        onClick={() => setModalIsOpen(true)}>
         <HiPencil size="40px" color="white"/>
         </Button>
     </Container>
-    <WriteReviewPage open={ modalIsOpen } close={ closeModal } />
+    <WriteReviewPage open={ modalIsOpen } closeModal={()=>setModalIsOpen(false)} />
     </>
     );
 }
