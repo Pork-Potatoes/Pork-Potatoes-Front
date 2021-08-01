@@ -39,7 +39,7 @@ class MyListPage extends React.Component {
   }
   getLists = async () => {
     try{
-      const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/9/folders", {httpsAgent: agent});
+      const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/1/folders", {httpsAgent: agent});
       this.setState({ lists });
     }
     catch(e){

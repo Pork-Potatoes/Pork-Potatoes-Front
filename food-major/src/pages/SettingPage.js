@@ -5,6 +5,7 @@ import styled from "styled-components";
 import NameChangeModal from "../components/Modals/NameChangeModal"
 import UserDeleteModal from "../components/Modals/UserDeleteModal"
 import ProfileChangeModal from "../components/Modals/ProfileChangeModal"
+import AuthModal from "../components/Modals/AuthModal"
 
 const Contents = styled.div`
   display: flex;
@@ -72,6 +73,7 @@ class SettingPage extends React.Component {
       nameChangeOpen: false,
       userDeleteOpen: false,
       profileChangeOpen: false,
+      authOpen: false
   }
   getUser = async () => {
     try{
@@ -108,6 +110,12 @@ class SettingPage extends React.Component {
     }
     const closeProfileChangeModal = () => {
       this.setState({profileChangeOpen: false});
+    }
+    const closeAuthModal = () => {
+      this.setState({authOpen: false});
+    }
+    const openAuthModal = () => {
+      this.setState({authOpen: true});
     }
     return(
       <Contents>
@@ -161,7 +169,7 @@ class SettingPage extends React.Component {
                     : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
                 }
               </div>
-              <Button>인증</Button>
+              <Button onClick={ openAuthModal }>인증</Button>
             </Line>
             <Line style={{width:"680px"}}>
               <Text>회원 탈퇴</Text>
@@ -171,7 +179,7 @@ class SettingPage extends React.Component {
           <NameChangeModal open={ this.state.nameChangeOpen } close={ closeNameChangeModal }></NameChangeModal>
           <UserDeleteModal open={ this.state.userDeleteOpen } close={ closeUserDeleteModal }></UserDeleteModal>
           <ProfileChangeModal open={ this.state.profileChangeOpen } close={ closeProfileChangeModal }></ProfileChangeModal>
-
+          <AuthModal open={ this.state.authOpen } close={ closeAuthModal }></AuthModal>
         </Container>
       </Contents>
     );

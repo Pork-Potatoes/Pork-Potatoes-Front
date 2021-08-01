@@ -39,7 +39,7 @@ class LikedListPage extends React.Component {
   }
   getLists = async () => {
     try{
-      const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/9/pins?sort=-CreatedDate", {httpsAgent: agent});
+      const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/1/pins?sort=-CreatedDate", {httpsAgent: agent});
       this.setState({ lists });
     }
     catch(e){
