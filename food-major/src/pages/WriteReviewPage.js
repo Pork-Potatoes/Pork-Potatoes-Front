@@ -5,8 +5,9 @@ import logo from '../assets/logo.png';
 import search from '../assets/search.png';
 import { fontSize } from "@material-ui/system";
 import Rating from '@material-ui/lab/Rating';
+import ReactStars from "react-rating-stars-component";
 import { makeStyles } from '@material-ui/core/styles';
-
+import axios from "axios";
 
 const Input = styled.div`
     display:flex;
@@ -62,10 +63,59 @@ const RegisterButton = styled.button`
 `
 
 
+
 class WriteReviewPage extends Component {
+  state={
+    inputRestaurant:'',
+    inputMenu:'',
+    inputContent:'',
+    curTime:new Date().toLocaleString(),
+    classes:'',
+    score:5
+  };
+  inputRestaurantChange=(event)=>{
+    let keyword=event.target.value;
+    this.setState({inputRestaurant:keyword})
+  }
+  inputReviewChange=(event)=>{
+    let keyword=event.target.value;
+    this.setState({inputReview:keyword})
+  }
+  inputContentChange=(event)=>{
+    let keyword=event.target.value;
+    this.setState({inputContent:keyword})
+  }
+
+  ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
+  addReview = async (event) => {
+    event.preventDefault();
+    try{
+      const response = await axios.post("https://www.matzipmajor.com/api/reviews",
+      {
+        restaurant:this.state.inputRestaurant,
+        user:7,
+        content:this.state.inputContent,
+        score:this.state.score,
+        anonymousFlag:true,
+        menuName:this.state.inputMenu,
+        tagFood:'분식',
+        tagMood:'회식',
+        createDate:this.state.curTime
+      });
+      response.status===200 ? alert("리뷰 업로드 완료!") : alert("다시 시도해주세요");
+    }
+    catch(e){
+      console.log("reviewUpload error");
+    }
+  }
 
     render() {
       const { open, close } = this.props;
+      console.log('type addReview:',typeof(this.addReview))
+
       return (
         <>
           {open ? (  
@@ -78,19 +128,31 @@ class WriteReviewPage extends Component {
                 <main onClick={open}>
                   <Input>
                     <Button><img src={search} alt="search" height="15px"/></Button>
-                    <InputConsol placeholder="맛집 이름을 입력해 주세요"/>
+                    <InputConsol placeholder="맛집 이름을 입력해 주세요"
+                    onChange={this.inputRestaurantChange}/>
                   </Input>
                   <Input>
                     <Button><img src={search} alt="search" height="15px"/></Button>
-                    <InputConsol placeholder="메뉴를 입력해 주세요"/>
+                    <InputConsol placeholder="메뉴를 입력해 주세요"
+                    onChange={this.inputReviewChange}/>
                   </Input>
                   <text style={{color:"rgb(17,17,17,0.48)", fontSize:"18px",marginTop:"11px"}}>선택하세요</text>
-                  <Rating name="rating" defaultValue={2.5} precision="0.5" size="large" />
+                  <ReactStars
+                    count={5}
+                    onChange={this.ratingChanged}
+                    size={24}
+                    isHalf={true}
+                    emptyIcon={<i className="far fa-star"></i>}
+                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    fullIcon={<i className="fa fa-star"></i>}
+                    activeColor="#ffd700"
+                  />
                   <hr size="10px" width="600vw" color="#D7D7D7" />
                   <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
-                  <InputContent placeholder="최소 10자 이상 입력해주세요."></InputContent>
+                  <InputContent placeholder="최소 10자 이상 입력해주세요." 
+                  onChange={this.inputContentChange}/>
                   <UploadButton>사진/동영상 첨부하기</UploadButton>
-                  <RegisterButton>리뷰 등록</RegisterButton>
+                  <RegisterButton onClick={this.addReview} >리뷰 등록</RegisterButton>
                 </main>
               </section>
             </div>

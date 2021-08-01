@@ -120,7 +120,25 @@ const agent = new https.Agent({
   rejectUnauthorized: false
 });
 
+const Line_style = styled.div`
+  border-top: #EFEFEF solid 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`
+const Select = styled.select`
+  border: 1px solid silver;
+  outline:none;
+  width: 150px;
+  height: 30px;
+`
+
+
 class SearchPage extends React.Component {
+  inputSearch = this.props.location.state.inputSearch;
   constructor(props){
     super(props);
     this.state = {
@@ -129,14 +147,35 @@ class SearchPage extends React.Component {
       filteredReviews:[]
     }
   }
-  getReviews = async () => {
+  getRecentReviews = async (inputSearch) => {
     try{
-      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
+      const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-created-date";
+      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
+      this.setState({ reviews });
+    }
+    catch(e){
+      console.log("getRecentReviews error");
+    }
+  }
+  getScoreReviews = async (inputSearch) => {
+    try{
+      const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-score";
+      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
+      this.setState({ reviews });
+    }
+    catch(e){
+      console.log("getScoreReviews error");
+    }
+  }
+  getLikeReviews = async (inputSearch) => {
+    try{
+      const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-liked-cnt";
+      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
       this.setState({ reviews });
       window.localStorage.setItem('restaurantNum', reviews.restaurant.restaurantNum);
     }
     catch(e){
-      console.log("getReviews error");
+      console.log("getLikeReviews error");
     }
   }
   getRestaurants= async (inputSearch) => {
@@ -146,23 +185,20 @@ class SearchPage extends React.Component {
       this.setState({ restaurants });
     }
     catch(e){
-      console.log("getReviews error");
+      console.log("getRestaurants error");
     }
   }
 
-
+  selectChange=(event,inputSearch)=>{
+    const selectValue=event.target.value;
+    if (selectValue ==='별점순'){this.getScoreReviews(inputSearch)}
+    else if (selectValue ==='인기순'){this.getLikeReviews(inputSearch)}
+    else {this.getRecentReviews(inputSearch)}
+  }
 
   render(){
   const inputSearch = this.props.location.state.inputSearch;
-  this.state.filteredReviews=this.state.reviews.filter((review)=>{
-    if(review.restaurant.restaurantName.toLowerCase().includes(Object.values({inputSearch}).toString())
-    || review.menuName.toLowerCase().includes(Object.values({inputSearch}).toString())
-    || review.tagFood.toLowerCase().includes(Object.values({inputSearch}).toString())
-    ){
-      return review
-      }
-  });
-  this.getReviews();
+  this.getRecentReviews(inputSearch);
   this.getRestaurants(inputSearch);
   return ( 
     <div>
@@ -178,7 +214,13 @@ class SearchPage extends React.Component {
     <Main>
       <Result>
         <h2>{inputSearch} 검색결과</h2>
-        <Sort />
+        <Line_style>
+        <Select onChange={(event)=>this.selectChange(event,this.inputSearch)}>
+            <option selected value="최신순">최신순으로</option>
+            <option value="별점순">별점순으로</option>
+            <option value="인기순">인기순으로</option>
+        </Select>
+      </Line_style>
       </Result>
       <SearchRestaurant>
         <div>
@@ -204,7 +246,7 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Grid>
-            {Object.values(this.state.filteredReviews).map((review) =>
+            {Object.values(this.state.reviews).map((review) =>
               <Review reviewNum={review.reviewNum}
                 image={review.filePath}
                 content={review.content}
