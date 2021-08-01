@@ -72,12 +72,6 @@ const ImageWrapper = styled.div`
   }
 `
 
-const Image = styled.image`
-  height: 10vh;
-  width:10vh;
-  margin:7px;
-`
-
 class ReviewPage extends Component {
   state={
     LikeButtonClicked:false,
@@ -109,7 +103,6 @@ class ReviewPage extends Component {
 
   render() {
     const { open, close ,reviewNum,restaurantName,menuName,content,score,createdDate,image,likedCnt} = this.props;
-
       return (
         <>
           {open ? (  
@@ -146,12 +139,9 @@ class ReviewPage extends Component {
                     }
                     <Button style={{border:'solid 1px black'}}><HiOutlineSpeakerphone style={{paddingRight:'7px', height:'15px'}}/>신고</Button>
                   </ButtonWrapper>
-                  {image===null ? null : 
-                    <ImageWrapper>
-                      <Image src={image}></Image>
-                    </ImageWrapper>
-                  }
-
+                  <ImageWrapper>
+                    <img src={image} style={{width:'10vh', height:'10vh'}}/>
+                  </ImageWrapper>                 
                 </main>
               </section>
             </div>
