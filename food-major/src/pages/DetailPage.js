@@ -12,6 +12,10 @@ const Contents = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 `
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`
 
 const NewReview = styled.div`
   height: 560px;
@@ -50,19 +54,21 @@ const DetailPage = () => {
       <NewReview>
         <h3 style={{marginBottom:0, marginLeft:15}}>최신 리뷰</h3>
             <Contents>
-            {data?.map((review) =>
-              <Review reviewNum={review.reviewNum}
-                image={review.filePath}
-                content={review.content}
-                restaurantName={review.restaurant.restaurantName}
-                menuName={review.menuName}
-                tagFood={review.tagFood}
-                tagMood={review.tagMood}
-                score={review.score}
-                createdDate={review.createdDate}
-                likedCnt={review.likedCnt}
-                />
-            )}
+              <Grid>
+                {data?.map((review) =>
+                  <Review reviewNum={review.reviewNum}
+                    image={review.filePath}
+                    content={review.content}
+                    restaurantName={review.restaurant.restaurantName}
+                    menuName={review.menuName}
+                    tagFood={review.tagFood}
+                    tagMood={review.tagMood}
+                    score={review.score}
+                    createdDate={review.createdDate}
+                    likedCnt={review.likedCnt}
+                    />
+                )}
+              </Grid>
             </Contents>
       </NewReview>
     </div>

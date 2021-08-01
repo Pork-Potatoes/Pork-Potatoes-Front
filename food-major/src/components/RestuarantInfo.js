@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { BsFillBookmarkFill, BsBookmark, BsStar } from "react-icons/bs";
 
 const RestInfo = styled.div`
-  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-left: 165px;
   margin-right: 165px;
+  margin-bottom: 50px;
   padding-top: 70px;
 `
 
@@ -53,7 +53,7 @@ const { kakao } = window;
 
 const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore, scrap}) => {
   const [scraped, setScraped] = useState(scrap);
-
+/*
   useEffect(()=> {
     const container = document.getElementById('restMap');
       const options = {
@@ -78,7 +78,7 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
         });
 
     }, []); 
-
+*/
   return (
       <RestInfo>
         <Title>
