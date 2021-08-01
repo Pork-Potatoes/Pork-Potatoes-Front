@@ -7,10 +7,11 @@ import ImgSlide from "../components/ImgSlide";
 
 const Banner = styled.div`
   width: 100vw;
-  height: 60vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 120px;
 `
 const Container = styled.div`
   display: flex;
