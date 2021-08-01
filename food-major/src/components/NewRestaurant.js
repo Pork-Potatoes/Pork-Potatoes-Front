@@ -85,6 +85,7 @@ class NewRestaurant extends React.Component{
             <Wrapper onClick={()=>this.props.history.push({
                 pathname:'/detailpage',
                 state:{
+                    restaurantNum:this.state.restaurant.restaurantNum,
                     restaurantName:this.state.restaurant.restaurantName,
                     address:this.state.restaurant.address,
                     phoneNum:this.state.restaurant.phoneNum,

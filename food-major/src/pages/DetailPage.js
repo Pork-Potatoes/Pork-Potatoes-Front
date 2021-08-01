@@ -24,12 +24,11 @@ const NewReview = styled.div`
 
 const DetailPage = () => {
   const location = useLocation();
-  const {restaurantName,address,phoneNum,businessHour,snsAccount,avgScore}=location.state;
+  const {restaurantNum, restaurantName,address,phoneNum,businessHour,snsAccount,avgScore}=location.state;
 
   const [data,setData] = useState();
 
     useEffect(async() => {
-      const restaurantNum = 3;
         try{
             const response = await axios.get(`https://www.matzipmajor.com/api/restaurants/${restaurantNum}/reviews?sort=-created-date`);
             setData(response.data);
