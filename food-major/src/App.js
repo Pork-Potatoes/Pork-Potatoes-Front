@@ -12,7 +12,7 @@ import WriteReviewButton from './components/WriteReviewButton';
 class App extends React.Component {
   render() {
     return(
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header/>
         <Switch>
           <Route path="/" component={MainPage} exact={true} />

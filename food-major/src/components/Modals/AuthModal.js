@@ -3,12 +3,12 @@ import './SettingModal.css';
 import axios from "axios";
 import swal from "sweetalert";
 
-class NameChangeModal extends Component {
+class AuthModal extends Component {
   state = {
-    name: ""
+    email: ""
   }
 
-  handleChange = ({target: {value}}) => this.setState({name:value});
+  handleChange = ({target: {value}}) => this.setState({email:value});
     render() {
       const { open, close } = this.props;
       const success = () => {
@@ -18,11 +18,12 @@ class NameChangeModal extends Component {
         });
         close()
       }
-      const nameChange = async (event) => {
+      const auth = async (event) => {
         event.preventDefault()
         try{
-          await axios.patch("https://www.matzipmajor.com/api/users/9/nickname", {"nickname":this.state.name});
-          success()
+          const response = await axios.post("https://www.matzipmajor.com/api/users/9/authenticate", {"university":"ewha", "email":this.state.email});
+          console.log(response)
+          //   success()
         }
         catch(e){
           alert("다시 새도해주세요");
@@ -33,10 +34,10 @@ class NameChangeModal extends Component {
           {open ? (  
             <div className="settingmodal">
               <section>
-                <h3>닉네임 변경</h3>
-                    <input type="text" value={this.name} onChange={this.handleChange} placeholder="새 닉네임"/>
+                <h3>학교 인증</h3>
+                    <input type="text" value={this.email} onChange={this.handleChange} placeholder="인증받을 학교 메일"/>
                   <div>
-                    <button onClick={nameChange} style={{color:"#d57358"}}>변경</button>
+                    <button onClick={auth} style={{color:"#d57358"}}>인증 메일 전송</button>
                     <button onClick={close}>닫기</button>
                   </div>
               </section>
@@ -46,4 +47,4 @@ class NameChangeModal extends Component {
       );
     }
   }
-export default NameChangeModal;
+export default AuthModal;

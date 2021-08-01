@@ -53,7 +53,6 @@ const { kakao } = window;
 
 const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore, scrap}) => {
   const [scraped, setScraped] = useState(scrap);
-/*
   useEffect(()=> {
     const container = document.getElementById('restMap');
       const options = {
@@ -78,7 +77,7 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
         });
 
     }, []); 
-*/
+
   return (
       <RestInfo>
         <Title>
