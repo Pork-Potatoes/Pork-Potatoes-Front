@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
+import { BsFillBookmarkFill, BsBookmark, BsStar } from "react-icons/bs";
 
 const RestInfo = styled.div`
-  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-left: 165px;
   margin-right: 165px;
+  margin-bottom: 50px;
   padding-top: 70px;
 `
 
@@ -53,7 +53,7 @@ const { kakao } = window;
 
 const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore, scrap}) => {
   const [scraped, setScraped] = useState(scrap);
-
+/*
   useEffect(()=> {
     const container = document.getElementById('restMap');
       const options = {
@@ -77,12 +77,12 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
             }
         });
 
-    }, []);
-
+    }, []); 
+*/
   return (
       <RestInfo>
         <Title>
-          <h2>{restaurantName} {avgScore}</h2>
+          <h2 style={{textAlign: 'center'}}>{restaurantName} <BsStar /> {avgScore}</h2>
           {scraped ? <BsBookmark onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/> : <BsFillBookmarkFill onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/>}
         </Title>
         <Info>
