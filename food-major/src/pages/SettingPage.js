@@ -75,7 +75,7 @@ class SettingPage extends React.Component {
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/3", {httpsAgent: agent});
+      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/9", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -160,7 +160,6 @@ class SettingPage extends React.Component {
                     ? <Text style={{marginLeft: "100px", color:"gray"}}>학교 인증이 필요합니다</Text>
                     : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
                 }
-                <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
               </div>
               <Button>인증</Button>
             </Line>

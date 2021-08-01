@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import './SettingModal.css';
 import axios from "axios";
+import swal from "sweetalert";
 import profile from "../../assets/icon.png";
 
 const Profile = styled.img`
@@ -23,21 +24,28 @@ class ProfileChangeModal extends Component {
       this.setState({ imageUrl : url })
       this.setState({ file: imageFile })
     }
-    profileChange = async (event) => {
-    event.preventDefault()
-        try{
-          const frm = new FormData();
-          frm.append("uploadFile", this.state.file);
-          const response = await axios.patch("https://www.matzipmajor.com/api/users/7/image", frm, {headers: {'Content-Type':'multipart/form-data'}});
-          console.log(response)
-          response.status===200 ? alert("변경되었습니다!") : alert("다시 시도해주세요");
-        }
-        catch(e){
-            console.log("profileChange error");
-        }
-    }
+
     render() {
       const { open, close } = this.props;
+      const success = () => {
+        swal("변경되었습니다", {
+          buttons: false,
+          timer: 1000,
+        });
+        close()
+      }
+      const profileChange = async (event) => {
+        event.preventDefault()
+            try{
+              const frm = new FormData();
+              frm.append("uploadFile", this.state.file);
+              await axios.patch("https://www.matzipmajor.com/api/users/9/image", frm, {headers: {'Content-Type':'multipart/form-data'}});
+              success();
+            }
+            catch(e){
+                alert("다시 시도해 주세요");
+            }
+        }
       return (
         <>
           {open ? (  
@@ -50,7 +58,7 @@ class ProfileChangeModal extends Component {
                 </label>
                 <input type="file" accept="image/*" onChange={this.processImage} id="input-file" style={{display:"none"}}/> 
                 <div>
-                    <button onClick={this.profileChange} style={{color:"#d57358"}}>변경</button>
+                    <button onClick={profileChange} style={{color:"#d57358"}}>변경</button>
                     <button onClick={() => {
                         this.setState({imageUrl:profile});
                         close();
