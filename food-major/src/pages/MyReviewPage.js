@@ -34,13 +34,14 @@ class MyReviewPage extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      currentPage: 1
+      currentPage: 1,
+      isLoading: true
     }
   }
   getReviews = async () => {
     try{
       const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
-      this.setState({ reviews });
+      this.setState({ reviews, isLoading: false });
     }
     catch(e){
       console.log("getReviews error");
@@ -51,7 +52,7 @@ class MyReviewPage extends React.Component {
   }
 
   render() {
-    const reviews = this.state.reviews;
+    const {isLoading, reviews} = this.state;
     const handlePageChange = (page) => {
       this.setState({currentPage: page});
     };
@@ -66,22 +67,30 @@ class MyReviewPage extends React.Component {
     const {length: count} = reviews;
     return(
       <Contents>
-        <Container>
-          <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 쓴 리뷰</h1>
-          <Grid>
-            {Object.values(pagedReviews).map( (review) =>
-              <Review key={review.id}
-                image={review.filePath}
-                content={review.content}
-                restaurantName={review.restaurant.restaurantName}
-                menuName={review.menuName}
-                tagFood={review.tagFood}
-                tagMood={review.tagMood}
-                score={review.score}
-                url={review.url} />
-            )}
-          </Grid>
-        </Container>
+        {isLoading
+        ? (
+          <div style={{width:"100%", height: "100vh", display:"flex", alignItems:"center", justifyContent:"center"}}>
+            <span style={{fontWeight:"500"}}>Loading...</span>
+          </div>
+        )
+        : (
+          <Container>
+            <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 쓴 리뷰</h1>
+            <Grid>
+              {Object.values(pagedReviews).map( (review) =>
+                <Review key={review.id}
+                  image={review.filePath}
+                  content={review.content}
+                  restaurantName={review.restaurant.restaurantName}
+                  menuName={review.menuName}
+                  tagFood={review.tagFood}
+                  tagMood={review.tagMood}
+                  score={review.score}
+                  url={review.url} />
+              )}
+            </Grid>
+          </Container>
+        )}
         <Pagination
           itemsCount={count}
           currentPage={this.state.currentPage}

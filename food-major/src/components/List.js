@@ -23,7 +23,7 @@ const Content = styled.button`
     border: none;
     cursor: pointer;
 `
-const List = ({ key, image, content, url }) => {
+const List = ({ key, content, url }) => {
     return (
         <Container href={url}>
             <Content>{content}</Content>

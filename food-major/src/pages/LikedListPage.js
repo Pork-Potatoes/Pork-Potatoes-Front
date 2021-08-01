@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import _ from 'lodash'; 
+import React from "react";
+import axios from "axios";
+import _ from 'lodash';
 import styled from "styled-components";
-
+import https from "https"
 import List from "../components/List";
 import Pagination from "../components/Pagination";
-
-import image1 from "../assets/reviewImg.png";
-import image2 from "../assets/test1.png";
 
 const Contents = styled.div`
   display: flex;
@@ -27,59 +25,65 @@ const Grid = styled.div`
   grid-template-rows: 1fr 1fr;
 `
 
-const LikedListPage = () => {
-  const getLists = () => {
-    const lists = [
-      { id: 0, image:`${image1}`, content:"윤지 님의 추천 맛집", url:"http://www.naver.com"},
-      { id: 1, image:`${image2}`, content:"이대 맛집 TOP 30", url:"http://www.naver.com"},
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
 
-    ]
-    return lists;
+class LikedListPage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      lists: [],
+      currentPage: 1
+    }
+  }
+  getLists = async () => {
+    try{
+      const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/1/pins?sort=-CreatedDate", {httpsAgent: agent});
+      this.setState({ lists });
+    }
+    catch(e){
+      console.log("getLists error");
+    }
+  }
+  componentDidMount() {
+    this.getLists();
   }
 
-  const [lists, setLists] = useState({
-    data: getLists(),
-    currentPage: 1
-  });
-
-  const handlePageChange = (page) => {
-    setLists({ ...lists, currentPage: page });
-  };
-
-  const paginate = (items, pageNumber) => {
-    const startIndex = (pageNumber - 1) * 6;
-  
-    return _(items)
-      .slice(startIndex)
-      .take(6)
-      .value();
+  render() {
+    const lists = this.state.lists;
+    const handlePageChange = (page) => {
+      this.setState({currentPage: page});
+    };
+    const paginate = (lists, pageNumber) => {
+      const startIndex = (pageNumber-1) * 6;
+      return _(lists)
+        .slice(startIndex)
+        .take(6)
+        .value();
+    }
+    const pagedLists = paginate(lists, this.state.currentPage);
+    const {length: count} = lists;
+    return(
+      <Contents>
+        <Container>
+          <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 만든 맛집 리스트</h1>
+          <Grid>
+            {Object.values(pagedLists).map( (list) =>
+              <List key={list.folder.folderNum}
+                content={list.folder.title}
+                url={list.url} />
+            )}
+          </Grid>
+        </Container>
+        <Pagination
+          itemsCount={count}
+          currentPage={this.state.currentPage}
+          onPageChange={handlePageChange}
+        />
+      </Contents>
+    );
   }
-
-  const { data, currentPage } = lists;
-  
-  const pagedLists = paginate(data, currentPage);
-
-  const { length: count } = lists.data;
-
-  return(
-    <Contents>
-      <Container>
-        <h1 style={{margin:"15px", paddingBottom:"30px"}}>좋아요 한 맛집 리스트</h1>
-        <Grid>
-          {pagedLists.map( (list) =>
-            <List key={list.id}
-              content={list.content}
-              url={list.url} />
-          )}
-        </Grid>
-      </Container>
-      <Pagination 
-      itemsCount={count} 
-      currentPage={currentPage} 
-      onPageChange={handlePageChange}
-    />
-    </Contents>
-  );
 }
 
 export default LikedListPage;

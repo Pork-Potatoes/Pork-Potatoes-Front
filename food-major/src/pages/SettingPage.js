@@ -5,6 +5,7 @@ import styled from "styled-components";
 import NameChangeModal from "../components/Modals/NameChangeModal"
 import UserDeleteModal from "../components/Modals/UserDeleteModal"
 import ProfileChangeModal from "../components/Modals/ProfileChangeModal"
+import AuthModal from "../components/Modals/AuthModal"
 
 const Contents = styled.div`
   display: flex;
@@ -72,10 +73,11 @@ class SettingPage extends React.Component {
       nameChangeOpen: false,
       userDeleteOpen: false,
       profileChangeOpen: false,
+      authOpen: false
   }
   getUser = async () => {
     try{
-      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/7", {httpsAgent: agent});
+      const {data: user} = await axios.get("https://www.matzipmajor.com/api/users/9", {httpsAgent: agent});
       this.setState({ user });
     }
     catch(e){
@@ -109,6 +111,12 @@ class SettingPage extends React.Component {
     const closeProfileChangeModal = () => {
       this.setState({profileChangeOpen: false});
     }
+    const closeAuthModal = () => {
+      this.setState({authOpen: false});
+    }
+    const openAuthModal = () => {
+      this.setState({authOpen: true});
+    }
     return(
       <Contents>
         <Container>
@@ -141,7 +149,7 @@ class SettingPage extends React.Component {
                 <Text>모은 코인 수</Text>
                 <Text style={{marginLeft: "80px", color:"gray"}}>{user.coin}</Text>
               </div>
-              <Button>환전</Button>
+              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAVOWmMV03kvcCu2MJyEHAddREAcbIXzlMXMTHzSdejHZE0Q/viewform?usp=sf_link', '_blank')}>환전</Button>
             </Line>
           </Box>
           <Box>
@@ -160,9 +168,8 @@ class SettingPage extends React.Component {
                     ? <Text style={{marginLeft: "100px", color:"gray"}}>학교 인증이 필요합니다</Text>
                     : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
                 }
-                <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
               </div>
-              <Button>인증</Button>
+              <Button onClick={ openAuthModal }>인증</Button>
             </Line>
             <Line style={{width:"680px"}}>
               <Text>회원 탈퇴</Text>
@@ -172,7 +179,7 @@ class SettingPage extends React.Component {
           <NameChangeModal open={ this.state.nameChangeOpen } close={ closeNameChangeModal }></NameChangeModal>
           <UserDeleteModal open={ this.state.userDeleteOpen } close={ closeUserDeleteModal }></UserDeleteModal>
           <ProfileChangeModal open={ this.state.profileChangeOpen } close={ closeProfileChangeModal }></ProfileChangeModal>
-
+          <AuthModal open={ this.state.authOpen } close={ closeAuthModal }></AuthModal>
         </Container>
       </Contents>
     );
