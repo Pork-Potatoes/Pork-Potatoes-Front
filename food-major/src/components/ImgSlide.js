@@ -7,15 +7,15 @@ function ImgSlide(props)
     var items = [
         {
             name: "윤지님이 뽑은 이대 밥약 맛집 100선",
-            description: "Probably the most random thing you have ever seen!"
+            Image: "https://cdn.pixabay.com/photo/2018/09/25/19/57/tomatoes-3702962_960_720.jpg"
         },
         {
             name: "해린님이 뽑은 이대 술집 TOP3",
-            description: "Hello World!"
+            Image: "https://cdn.pixabay.com/photo/2014/09/15/16/53/tomatoes-447170_960_720.jpg"
         },
         {
             name: "드림님이 뽑은 이색 맛집 TOP5",
-            description: "Hello World!"
+            Image: "https://cdn.pixabay.com/photo/2018/05/27/16/10/cherries-3433775_960_720.jpg"
         }
     ]
 
@@ -32,8 +32,7 @@ function Item(props)
 {
     return (
         <Paper>
-            <h2>{props.item.name}</h2>
-            <p>{props.item.description}</p>
+            <img src={props.item.Image}/>
         </Paper>
     )
 }

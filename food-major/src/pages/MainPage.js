@@ -6,12 +6,12 @@ import Review from "../components/Review";
 import ImgSlide from "../components/ImgSlide";
 
 const Banner = styled.div`
-  background-color: #9FB7B9;
   width: 100vw;
-  height: 60vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
 `
 const Container = styled.div`
   display: flex;
