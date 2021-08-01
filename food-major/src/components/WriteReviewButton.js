@@ -4,9 +4,9 @@ import React, { Component,useState } from "react";
 import WriteReviewPage from "../pages/WriteReviewPage";
 
 const WriteReviewButton = () =>{
-    const [ modalOpen, setModalOpen ] = useState(false);
-    const openModal = () => {setModalOpen(true);}
-    const closeModal = () => {setModalOpen(false);}
+    const [ modalIsOpen, setModalIsOpen ] = useState(false);
+    const openModal = () => {setModalIsOpen(true);}
+    const closeModal = () => {setModalIsOpen(false);}
 
     return(
     <>
@@ -22,7 +22,7 @@ const WriteReviewButton = () =>{
         <HiPencil size="40px" color="white"/>
         </Button>
     </Container>
-    <WriteReviewPage open={ modalOpen } close={ closeModal } />
+    <WriteReviewPage open={ modalIsOpen } close={ closeModal } />
     </>
     );
 }
