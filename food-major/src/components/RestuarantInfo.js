@@ -61,12 +61,9 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
       };
       const map = new kakao.maps.Map(container, options);
       const geocoder = new kakao.maps.services.Geocoder();
-      geocoder.addressSearch(address, function (result, status) {
-            
+      geocoder.addressSearch(address, function (result, status) {            
             if (status === kakao.maps.services.Status.OK) {
-
                 const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
                 const marker = new kakao.maps.Marker({
                     map: map,
                     position: coords
@@ -75,7 +72,6 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
                 console.log(coords);
             }
         });
-
     }, []); 
 
   return (

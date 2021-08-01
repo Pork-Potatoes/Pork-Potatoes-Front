@@ -9,6 +9,7 @@ import NewRestaurant from '../components/NewRestaurant';
 import Sort from '../components/Sort.js';
 import axios from 'axios';
 import https from "https";
+import { useLocation } from 'react-router';
 
 
 const Filtering = styled.div`
@@ -137,69 +138,67 @@ const Select = styled.select`
 `
 
 
-class SearchPage extends React.Component {
-  inputSearch = this.props.location.state.inputSearch;
-  constructor(props){
-    super(props);
-    this.state = {
-      reviews: [],
-      restaurants: [],
-      filteredReviews:[]
-    }
-  }
-  getRecentReviews = async (inputSearch) => {
+function SearchPage (props) {
+  const location=useLocation();
+  const inputSearch = location.state.inputSearch;
+  const [reviews,setReviews]=useState([]);
+  const [restaurants,setRestaurants]=useState([]);
+  const [filteredReviews,setFilteredReviews]=useState([]);
+
+  const getRecentReviews = async () => {
     try{
       const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-created-date";
-      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
-      this.setState({ reviews });
+      const dataset = await axios.get(url, {httpsAgent: agent});
+      const reviewdata=dataset.data;
+      setReviews({ reviewdata });
     }
     catch(e){
       console.log("getRecentReviews error");
     }
   }
-  getScoreReviews = async (inputSearch) => {
+  const getScoreReviews = async () => {
     try{
       const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-score";
-      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
-      this.setState({ reviews });
+      const dataset = await axios.get(url, {httpsAgent: agent});
+      const reviewdata=dataset.data;
+      setReviews({ reviewdata });
     }
     catch(e){
       console.log("getScoreReviews error");
     }
   }
-  getLikeReviews = async (inputSearch) => {
+  const getLikeReviews = async () => {
     try{
       const url="https://www.matzipmajor.com/api/reviews?query="+Object.values({inputSearch}).toString()+"&sort=-liked-cnt";
-      const {data: reviews} = await axios.get(url, {httpsAgent: agent});
-      this.setState({ reviews });
-      window.localStorage.setItem('restaurantNum', reviews.restaurant.restaurantNum);
+      const dataset = await axios.get(url, {httpsAgent: agent});
+      const reviewdata=dataset.data;
+      setReviews({ reviewdata });
     }
     catch(e){
       console.log("getLikeReviews error");
     }
   }
-  getRestaurants= async (inputSearch) => {
+  const getRestaurants= async () => {
     try{
       const url="https://www.matzipmajor.com/api/search?q="+Object.values({inputSearch}).toString();
-      const {data: restaurants} = await axios.get(url, {httpsAgent: agent});
-      this.setState({ restaurants });
+      const dataset = await axios.get(url, {httpsAgent: agent});
+      const restaurantdata=dataset.data;
+      setRestaurants({ restaurantdata });
+      console.log('왜 에러')
     }
     catch(e){
       console.log("getRestaurants error");
     }
   }
 
-  selectChange=(event,inputSearch)=>{
+  const selectChange=(event)=>{
     const selectValue=event.target.value;
-    if (selectValue ==='별점순'){this.getScoreReviews(inputSearch)}
-    else if (selectValue ==='인기순'){this.getLikeReviews(inputSearch)}
-    else {this.getRecentReviews(inputSearch)}
+    if (selectValue ==='별점순'){getScoreReviews()}
+    else if (selectValue ==='인기순'){getLikeReviews()}
+    else {getRecentReviews()}
   }
 
-  render(){
-  const inputSearch = this.props.location.state.inputSearch;
-  this.getRecentReviews(inputSearch);
-  this.getRestaurants(inputSearch);
+
   return ( 
     <div>
     <Filtering>
@@ -215,12 +214,12 @@ class SearchPage extends React.Component {
       <Result>
         <h2>{inputSearch} 검색결과</h2>
         <Line_style>
-        <Select onChange={(event)=>this.selectChange(event,this.inputSearch)}>
+          <Select onChange={(event)=>selectChange(event)}>
             <option selected value="최신순">최신순으로</option>
             <option value="별점순">별점순으로</option>
             <option value="인기순">인기순으로</option>
-        </Select>
-      </Line_style>
+          </Select>
+        </Line_style>
       </Result>
       <SearchRestaurant>
         <div>
@@ -229,7 +228,7 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Contents>
-          {Object.values(this.state.restaurants).map((restaurant) =>
+          {Object.values(restaurants).map((restaurant) =>
             <NewRestaurant 
             restaurantNum={restaurant.restaurantNum}
             restaurantName={restaurant.restaurantName} 
@@ -246,8 +245,9 @@ class SearchPage extends React.Component {
           <hr size="10px" width="100%" color="#D1D1D1" />
         </div>
         <Grid>
-            {Object.values(this.state.reviews).map((review) =>
-              <Review reviewNum={review.reviewNum}
+            {Object.values(reviews).map((review) =>
+              <Review
+                reviewNum={review.reviewNum}
                 image={review.filePath}
                 content={review.content}
                 restaurantName={review.restaurant.restaurantName}
@@ -257,7 +257,7 @@ class SearchPage extends React.Component {
                 score={review.score}
                 createdDate={review.createdDate}
                 likedCnt={review.likedCnt}
-                />
+              />
             )}
         </Grid>
       </SearchReview>
@@ -265,6 +265,5 @@ class SearchPage extends React.Component {
     </div>
   );
   }
-};
 
 export default SearchPage;
