@@ -51,18 +51,17 @@ class NewRestaurant extends React.Component{
         liked:'like'
     };
 
-    rating = (score, number) => {
+    rating = (avgScore) => {
         const result = [];
         for (let i = 5; i > 0; i--){
-            score--;
-            if (score>=0){
+            avgScore--;
+            if (avgScore>=0){
                 result.push(<FaStar size="12" color="#d57358"></FaStar>);
             }
             else {
                 result.push(<FaStar size="12" color="lightgray"></FaStar>);
             }
         }
-        result.push(<small style={{color: "gray"}}> 리뷰 {number}개</small>);
         return result;
     }
 
@@ -78,7 +77,7 @@ class NewRestaurant extends React.Component{
       }
 
     render(){
-        const { restaurantNum, restaurantName, number, like, avgScore }=this.props;
+        const { restaurantNum, restaurantName, avgScore }=this.props;
         this.getRestaurant(restaurantNum);
     return (
         <Container>
@@ -96,12 +95,11 @@ class NewRestaurant extends React.Component{
                     
                 })
             }>
-                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3>
-                <h2>{avgScore}</h2>
+                <h3 style={{color: "black", fontWeight:"bold", margin:"0px"}}>{restaurantName}</h3> <br/><br />
                 <div>
                     {
-                        this.rating(avgScore, number)
-                    }
+                        this.rating(avgScore)
+                    } 평점 {avgScore}
                 </div>
             </Wrapper>
         </Container>
