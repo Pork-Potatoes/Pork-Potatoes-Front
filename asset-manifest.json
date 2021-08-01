@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Pork-Potatoes-Front/static/css/main.cc4e1a3d.chunk.css",
-    "main.js": "/Pork-Potatoes-Front/static/js/main.76e1ea16.chunk.js",
-    "main.js.map": "/Pork-Potatoes-Front/static/js/main.76e1ea16.chunk.js.map",
-    "runtime-main.js": "/Pork-Potatoes-Front/static/js/runtime-main.7a0ab988.js",
-    "runtime-main.js.map": "/Pork-Potatoes-Front/static/js/runtime-main.7a0ab988.js.map",
-    "static/js/2.3d36ece3.chunk.js": "/Pork-Potatoes-Front/static/js/2.3d36ece3.chunk.js",
-    "static/js/2.3d36ece3.chunk.js.map": "/Pork-Potatoes-Front/static/js/2.3d36ece3.chunk.js.map",
-    "static/js/3.c0964339.chunk.js": "/Pork-Potatoes-Front/static/js/3.c0964339.chunk.js",
-    "static/js/3.c0964339.chunk.js.map": "/Pork-Potatoes-Front/static/js/3.c0964339.chunk.js.map",
+    "main.js": "/Pork-Potatoes-Front/static/js/main.94f6e914.chunk.js",
+    "main.js.map": "/Pork-Potatoes-Front/static/js/main.94f6e914.chunk.js.map",
+    "runtime-main.js": "/Pork-Potatoes-Front/static/js/runtime-main.70542003.js",
+    "runtime-main.js.map": "/Pork-Potatoes-Front/static/js/runtime-main.70542003.js.map",
+    "static/js/2.20b69f47.chunk.js": "/Pork-Potatoes-Front/static/js/2.20b69f47.chunk.js",
+    "static/js/2.20b69f47.chunk.js.map": "/Pork-Potatoes-Front/static/js/2.20b69f47.chunk.js.map",
+    "static/js/3.ff95a18a.chunk.js": "/Pork-Potatoes-Front/static/js/3.ff95a18a.chunk.js",
+    "static/js/3.ff95a18a.chunk.js.map": "/Pork-Potatoes-Front/static/js/3.ff95a18a.chunk.js.map",
     "index.html": "/Pork-Potatoes-Front/index.html",
     "static/css/main.cc4e1a3d.chunk.css.map": "/Pork-Potatoes-Front/static/css/main.cc4e1a3d.chunk.css.map",
-    "static/js/2.3d36ece3.chunk.js.LICENSE.txt": "/Pork-Potatoes-Front/static/js/2.3d36ece3.chunk.js.LICENSE.txt",
+    "static/js/2.20b69f47.chunk.js.LICENSE.txt": "/Pork-Potatoes-Front/static/js/2.20b69f47.chunk.js.LICENSE.txt",
     "static/media/Modal.css": "/Pork-Potatoes-Front/static/media/cancel.e04ba908.svg",
     "static/media/icon.729074a0.png": "/Pork-Potatoes-Front/static/media/icon.729074a0.png",
     "static/media/logo.1777a93b.png": "/Pork-Potatoes-Front/static/media/logo.1777a93b.png",
@@ -22,9 +22,9 @@
     "static/media/test4.6f79eefd.png": "/Pork-Potatoes-Front/static/media/test4.6f79eefd.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7a0ab988.js",
-    "static/js/2.3d36ece3.chunk.js",
+    "static/js/runtime-main.70542003.js",
+    "static/js/2.20b69f47.chunk.js",
     "static/css/main.cc4e1a3d.chunk.css",
-    "static/js/main.76e1ea16.chunk.js"
+    "static/js/main.94f6e914.chunk.js"
   ]
 }
