@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Pork-Potatoes-Front/static/css/main.cc4e1a3d.chunk.css",
-    "main.js": "/Pork-Potatoes-Front/static/js/main.ce85e38a.chunk.js",
-    "main.js.map": "/Pork-Potatoes-Front/static/js/main.ce85e38a.chunk.js.map",
+    "main.js": "/Pork-Potatoes-Front/static/js/main.f2b3d42d.chunk.js",
+    "main.js.map": "/Pork-Potatoes-Front/static/js/main.f2b3d42d.chunk.js.map",
     "runtime-main.js": "/Pork-Potatoes-Front/static/js/runtime-main.7a0ab988.js",
     "runtime-main.js.map": "/Pork-Potatoes-Front/static/js/runtime-main.7a0ab988.js.map",
     "static/js/2.3d36ece3.chunk.js": "/Pork-Potatoes-Front/static/js/2.3d36ece3.chunk.js",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.7a0ab988.js",
     "static/js/2.3d36ece3.chunk.js",
     "static/css/main.cc4e1a3d.chunk.css",
-    "static/js/main.ce85e38a.chunk.js"
+    "static/js/main.f2b3d42d.chunk.js"
   ]
 }
