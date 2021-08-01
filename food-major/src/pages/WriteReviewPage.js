@@ -91,6 +91,7 @@ class WriteReviewPage extends Component {
   };
 
   addReview = async (event) => {
+    event.preventDefault();
     try{
       const response = await axios.post("https://www.matzipmajor.com/api/reviews",
       {
@@ -113,7 +114,7 @@ class WriteReviewPage extends Component {
 
     render() {
       const { open, close } = this.props;
-
+      console.log('type addReview:',typeof(this.addReview))
 
       return (
         <>

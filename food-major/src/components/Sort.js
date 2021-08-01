@@ -18,12 +18,17 @@ const Select = styled.select`
   height: 30px;
 `
   
+const selectChange=(event)=>{
+  console.log(event.target.value);
+}
+
+
   const Sort = () => (
     <Line_style>
-        <Select>
+        <Select onChange={selectChange}>
             <option selected value="최신순">최신순으로</option>
             <option value="별점순">별점순으로</option>
-            <option value="좋아요순">인기순으로</option>
+            <option value="인기순">인기순으로</option>
         </Select>
     </Line_style>
   )
