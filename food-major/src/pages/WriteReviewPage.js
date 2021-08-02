@@ -20,7 +20,7 @@ const Input = styled.div`
     width:35vw;
     height:5vh;
     border: none;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 `
 const InputConsol = styled.input`
     border: none;
@@ -84,7 +84,6 @@ function WriteReviewPage (props) {
     setImageUrl({url});
     setFile({file});
   }
-
   const successAddReview = () => {
     swal("리뷰가 등록되었습니다.", {
       buttons: false,
@@ -92,7 +91,6 @@ function WriteReviewPage (props) {
     });
     closeModal();
   }
-
   const failAddReview = () => {
     swal("리뷰 등록에 실패했습니다..", {
       buttons: false,
@@ -100,7 +98,6 @@ function WriteReviewPage (props) {
     });
     closeModal();
   }
-
   const inputRestaurantChange=(event)=>{
     const keyword=event.target.value;
     setInputRestaurant({keyword})
@@ -119,7 +116,6 @@ function WriteReviewPage (props) {
   const addReview = async () => {
     const restaurantObject=getRestaurant();
     const userObject=getUser();
-
     try{
       const frm = new FormData();
       frm.append("uploadFile", file);
@@ -135,7 +131,7 @@ function WriteReviewPage (props) {
           "tagFood":'분식',
           "tagMood":'회식',
           "createdDate":new Date(),
-      }
+        }
       });
       console.log(response)
       response.status===200 ? successAddReview() : failAddReview();
@@ -202,13 +198,15 @@ function WriteReviewPage (props) {
                 fullIcon={<i className="fa fa-star"></i>}
                 activeColor="#ffd700"
               />
-              <hr size="10px" width="600vw" color="#D7D7D7" />
+              <hr size="10px" width="300vw" color="#D7D7D7" />
               <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
               <InputContent placeholder="최소 10자 이상 입력해주세요." 
               onChange={inputContentChange}/>
               <input type="file" accept="image/*" onChange={processImage} id="input-file"/> 
-              <RegisterButton onClick={addReview} >리뷰 등록</RegisterButton>
             </main>
+            <footer>
+              <RegisterButton onClick={addReview} >리뷰 등록</RegisterButton>
+            </footer>
           </section>
         </div>
     ):null}
