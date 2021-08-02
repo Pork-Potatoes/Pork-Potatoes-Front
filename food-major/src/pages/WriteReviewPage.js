@@ -82,7 +82,7 @@ function WriteReviewPage (props) {
     const imageFile = event.target.files[0];
     const url = URL.createObjectURL(imageFile);
     setImageUrl({url});
-    setFile({file});
+    setFile({imageFile});
   }
   const successAddReview = () => {
     swal("리뷰가 등록되었습니다.", {
@@ -114,13 +114,20 @@ function WriteReviewPage (props) {
     setScore({newRating});
   };
   const addReview = async () => {
-    const restaurantObject=getRestaurant();
-    const userObject=getUser();
+    const restaurantObject=await getRestaurant();
+    const userObject=await getUser();
     try{
-      const frm = new FormData();
-      frm.append("uploadFile", file);
+      const formData=new FormData();
+      formData.append('file',file);
+      console.log('file ',file);
+      console.log('formData ',formData);
+      console.log('resobj',restaurantObject)
+      console.log('userobj',userObject)
+      console.log(Object.values(inputContent).toString())
+      console.log(parseFloat(Object.values(score).toString()))
+      console.log(new Date())
       const response = await axios.post('https://www.matzipmajor.com/api/reviews',
-      {"image":frm,
+      {"image":formData,
         "requestDto":{
           "restaurant":restaurantObject,
           "user":userObject,
@@ -140,7 +147,6 @@ function WriteReviewPage (props) {
       console.log('reviewUpload error');
     }
   }
-
   const getRestaurant= async () => {
     try{
       const url="https://www.matzipmajor.com/api/search?q="+Object.values(inputRestaurant).toString();
@@ -154,7 +160,6 @@ function WriteReviewPage (props) {
       console.log("getRestaurant error");
     }
   }
-
   const getUser= async () => {
     try{
       const url="https://www.matzipmajor.com/api/users/"+1;
