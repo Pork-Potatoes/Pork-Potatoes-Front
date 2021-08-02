@@ -9,6 +9,7 @@ import ReactStars from "react-rating-stars-component";
 import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import https from "https";
+import swal from "sweetalert";
 
 const Input = styled.div`
     display:flex;
@@ -19,13 +20,13 @@ const Input = styled.div`
     width:35vw;
     height:5vh;
     border: none;
-    margin-bottom: 23px;
+    margin-bottom: 18px;
 `
 const InputConsol = styled.input`
     border: none;
     outline: none;
     width: 35vw;
-    height: 5vh;
+    height: 4vh;
 ` 
 
 const InputContent = styled.input`
@@ -33,8 +34,9 @@ const InputContent = styled.input`
     outline: none;
     background-color: #F4F4F4;
     width: 35vw;
-    height: 30vh;
-    margin-top:16px;
+    height: 20vh;
+    margin-top:14px;
+    margin-bottom: 14px;
 ` 
 const Button = styled.button`
     background-color: white;
@@ -54,8 +56,9 @@ const UploadButton = styled.button`
 
 const RegisterButton = styled.button`
   width:25vw;
-  height:8vh;
-  margin-top: 10px;
+  min-height: 4vh;
+  max-height:8vh;
+  margin-top: 20px;
   background-color: white;
   border:solid 1px #BABABA;
   border-radius: 32px;
@@ -72,6 +75,31 @@ function WriteReviewPage (props) {
   const [inputMenu,setInputMenu]=useState('');
   const [inputContent,setInputContent]=useState('');
   const [score,setScore]=useState(5);
+  const [imageUrl,setImageUrl]=useState(null);
+  const [file,setFile]=useState(null);
+
+  const processImage = (event) => {
+    const imageFile = event.target.files[0];
+    const url = URL.createObjectURL(imageFile);
+    setImageUrl({url});
+    setFile({file});
+  }
+
+  const successAddReview = () => {
+    swal("리뷰가 등록되었습니다.", {
+      buttons: false,
+      timer: 1000,
+    });
+    closeModal();
+  }
+
+  const failAddReview = () => {
+    swal("리뷰 등록에 실패했습니다..", {
+      buttons: false,
+      timer: 1000,
+    });
+    closeModal();
+  }
 
   const inputRestaurantChange=(event)=>{
     const keyword=event.target.value;
@@ -91,30 +119,26 @@ function WriteReviewPage (props) {
   const addReview = async () => {
     const restaurantObject=getRestaurant();
     const userObject=getUser();
-    console.log(typeof(restaurantObject))
-    console.log(typeof(userObject))
-    console.log(typeof(Object.values(inputContent).toString()))
-    console.log(typeof(parseFloat(Object.values(score).toString())))
-    console.log(typeof(true))
-    console.log(typeof(Object.values(inputMenu).toString()))
-    console.log(typeof(new Date()))
 
     try{
+      const frm = new FormData();
+      frm.append("uploadFile", file);
       const response = await axios.post('https://www.matzipmajor.com/api/reviews',
-      {
-        "restaurant":restaurantObject,
-        "user":userObject,
-        "content":Object.values(inputContent).toString(),
-        "score":parseFloat(Object.values(score).toString()),
-        "anonymousFlag":true,
-        "menuName":Object.values(inputMenu).toString(),
-        "tagFood":'분식',
-        "tagMood":'회식',
-        "createdDate":new Date()
-      
+      {"image":frm,
+        "requestDto":{
+          "restaurant":restaurantObject,
+          "user":userObject,
+          "content":Object.values(inputContent).toString(),
+          "score":parseFloat(Object.values(score).toString()),
+          "anonymousFlag":true,
+          "menuName":Object.values(inputMenu).toString(),
+          "tagFood":'분식',
+          "tagMood":'회식',
+          "createdDate":new Date(),
+      }
       });
       console.log(response)
-      response.status===200 ? alert('리뷰 업로드 완료!') : alert('다시 시도해주세요');
+      response.status===200 ? successAddReview() : failAddReview();
     }
     catch(e){
       console.log('reviewUpload error');
@@ -182,7 +206,7 @@ function WriteReviewPage (props) {
               <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
               <InputContent placeholder="최소 10자 이상 입력해주세요." 
               onChange={inputContentChange}/>
-              <UploadButton>사진/동영상 첨부하기</UploadButton>
+              <input type="file" accept="image/*" onChange={processImage} id="input-file"/> 
               <RegisterButton onClick={addReview} >리뷰 등록</RegisterButton>
             </main>
           </section>
