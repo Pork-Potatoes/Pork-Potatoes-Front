@@ -2,33 +2,30 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.a`
-    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 20px;
     margin: 15px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 300px;
     height: 150px;
-    text-decoration: none;
+    cursor: pointer;
 `
 const Content = styled.button`
     background-color: white;
     font-size: x-large;
     font-weight: bold;
-    color: black;
-    width: 300px;
-    height: 150px;
-    position: absolute;
+    color: gray;
     border: none;
     cursor: pointer;
 `
-const List = ({ key, content, url }) => {
+const List = ({ content, url }) => {
     return (
         <Container href={url}>
             <Content>{content}</Content>
         </Container>
     );
-  }
+}
 
 export default List;

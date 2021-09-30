@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import Sidebar from "../components/Sidebar";
 
 import MyReview from "./MyReviewPage";
@@ -12,12 +13,13 @@ const Center = styled.div`
   height: 91vh;
   display: flex;
   flex-direction: row;
+  padding-top: 70px;
 `
 
 function MyPage() {
     return(
       <BrowserRouter>
-        <Center style={{paddingTop:"70px"}}>
+        <Center>
           <Sidebar/>
           <Switch>
             <Route exact path="/mypage/myreview" component={MyReview} />
