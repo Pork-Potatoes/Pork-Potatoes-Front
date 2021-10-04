@@ -39,7 +39,7 @@ class MyReviewPage extends React.Component {
   
   getReviews = async () => {
     try{
-      const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
+      const {data: reviews} = await axios.get("https://matzipmajor.com/api/users/1/reviews?sort=-created-date", {httpsAgent: agent});
       this.setState({ reviews, isLoading: false });
     }
     catch(e){
@@ -79,6 +79,7 @@ class MyReviewPage extends React.Component {
               {Object.values(pagedReviews).map((review) =>
                 <Review
                   key={review.id}
+                  reviewNum={review.reviewNum}
                   image={review.filePath}
                   content={review.content}
                   restaurantName={review.restaurant.restaurantName}
