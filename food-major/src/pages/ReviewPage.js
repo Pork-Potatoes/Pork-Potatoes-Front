@@ -140,7 +140,7 @@ class ReviewPage extends Component {
                     <Button style={{border:'solid 1px black'}}><HiOutlineSpeakerphone style={{paddingRight:'7px', height:'15px'}}/>신고</Button>
                   </ButtonWrapper>
                   <ImageWrapper>
-                    <img src={image} style={{width:'10vh', height:'10vh'}}/>
+                    <img src={image} style={{width:'15vh'}}/>
                   </ImageWrapper>                 
                 </main>
               </section>

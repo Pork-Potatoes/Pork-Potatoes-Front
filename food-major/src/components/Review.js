@@ -50,7 +50,7 @@ const Tag = styled.button`
     background-color: #d57358;
     font-size: xx-small;
     color: white;
-    padding-inline: 10px;
+    padding-inline: 0.3rem;
     border: none;
     height: 20px;
     border-radius: 50px;
