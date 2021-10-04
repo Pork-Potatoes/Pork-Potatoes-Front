@@ -1,10 +1,8 @@
 
 .modal{
-    display:grid;
-    grid-template-columns:33% 33% auto;
     display: inline-block;
     background-color:white;
-	position:absolute;
+	position:fixed;
     vertical-align: middle;
     text-align: center;
 	height: 80vh;
