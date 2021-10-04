@@ -3,6 +3,7 @@ import axios from "axios";
 import _ from 'lodash';
 import styled from "styled-components";
 import https from "https"
+
 import Review from "../components/Review";
 import Pagination from "../components/Pagination";
 
@@ -30,14 +31,12 @@ const agent = new https.Agent({
 });
 
 class MyReviewPage extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      reviews: [],
-      currentPage: 1,
-      isLoading: true
-    }
+  state = {
+    reviews: [],
+    currentPage: 1,
+    isLoading: true
   }
+  
   getReviews = async () => {
     try{
       const {data: reviews} = await axios.get("https://www.matzipmajor.com/api/reviews/recent", {httpsAgent: agent});
@@ -77,8 +76,9 @@ class MyReviewPage extends React.Component {
           <Container>
             <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 쓴 리뷰</h1>
             <Grid>
-              {Object.values(pagedReviews).map( (review) =>
-                <Review key={review.id}
+              {Object.values(pagedReviews).map((review) =>
+                <Review
+                  key={review.id}
                   image={review.filePath}
                   content={review.content}
                   restaurantName={review.restaurant.restaurantName}
@@ -86,7 +86,8 @@ class MyReviewPage extends React.Component {
                   tagFood={review.tagFood}
                   tagMood={review.tagMood}
                   score={review.score}
-                  url={review.url} />
+                  url={review.url}
+                />
               )}
             </Grid>
           </Container>

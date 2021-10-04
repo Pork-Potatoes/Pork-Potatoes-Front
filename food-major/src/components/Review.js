@@ -60,7 +60,7 @@ const Tag = styled.button`
 `
 const agent = new https.Agent({
     rejectUnauthorized: false
-  });
+});
 
 class Review extends React.Component{
     state = {
@@ -94,9 +94,9 @@ class Review extends React.Component{
             this.setState({ review:reviewdata.data });
         }
         catch(e){
-          console.log("getReview error");
+            console.log("getReview error");
         }
-      }
+    }
 
     render(){
         const {reviewNum, image, content, restaurantName, menuName, tagFood, tagMood, score}=this.props;
@@ -141,6 +141,6 @@ class Review extends React.Component{
         ></ReviewPage>
         </div>
     );
-  }}
+}}
 
 export default withRouter(Review);

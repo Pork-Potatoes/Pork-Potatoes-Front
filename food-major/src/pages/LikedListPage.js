@@ -30,12 +30,9 @@ const agent = new https.Agent({
 });
 
 class LikedListPage extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      lists: [],
-      currentPage: 1
-    }
+  state = {
+    lists: [],
+    currentPage: 1
   }
   getLists = async () => {
     try{
@@ -70,9 +67,11 @@ class LikedListPage extends React.Component {
           <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 만든 맛집 리스트</h1>
           <Grid>
             {Object.values(pagedLists).map( (list) =>
-              <List key={list.folder.folderNum}
+              <List
+                key={list.folder.folderNum}
                 content={list.folder.title}
-                url={list.url} />
+                url={list.url}
+              />
             )}
           </Grid>
         </Container>

@@ -13,6 +13,7 @@ const Contents = styled.div`
   justify-content: center;
   width: 2400px;
 `
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,13 +31,11 @@ const agent = new https.Agent({
 });
 
 class MyListPage extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      lists: [],
-      currentPage: 1
-    }
+  state = {
+    lists: [],
+    currentPage: 1
   }
+  
   getLists = async () => {
     try{
       const {data: lists} = await axios.get("https://www.matzipmajor.com/api/users/1/folders", {httpsAgent: agent});
@@ -69,10 +68,12 @@ class MyListPage extends React.Component {
         <Container>
           <h1 style={{margin:"15px", paddingBottom:"30px"}}>내가 만든 맛집 리스트</h1>
           <Grid>
-            {Object.values(pagedLists).map( (list) =>
-              <List key={list.folderNum}
+            {Object.values(pagedLists).map((list) =>
+              <List
+                key={list.folderNum}
                 content={list.title}
-                url={list.url} />
+                url={list.url}
+              />
             )}
           </Grid>
         </Container>

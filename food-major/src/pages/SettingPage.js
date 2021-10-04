@@ -2,6 +2,7 @@ import React from "react";
 import https from "https"
 import axios from "axios";
 import styled from "styled-components";
+
 import NameChangeModal from "../components/Modals/NameChangeModal"
 import UserDeleteModal from "../components/Modals/UserDeleteModal"
 import ProfileChangeModal from "../components/Modals/ProfileChangeModal"
@@ -69,11 +70,11 @@ const agent = new https.Agent({
 
 class SettingPage extends React.Component {
   state = {
-      user: {},
-      nameChangeOpen: false,
-      userDeleteOpen: false,
-      profileChangeOpen: false,
-      authOpen: false
+    user: {},
+    nameChangeOpen: false,
+    userDeleteOpen: false,
+    profileChangeOpen: false,
+    authOpen: false
   }
   getUser = async () => {
     try{
@@ -164,12 +165,16 @@ class SettingPage extends React.Component {
               <div style={{display:"flex"}}>
                 <Text>학교 인증</Text>
                 {
-                    user.university===null
-                    ? <Text style={{marginLeft: "100px", color:"gray"}}>학교 인증이 필요합니다</Text>
-                    : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
+                  user.university===null
+                  ? <Text style={{marginLeft: "100px", color:"gray"}}>학교 인증이 필요합니다</Text>
+                  : <Text style={{marginLeft: "100px", color:"gray"}}>{user.university}</Text>
                 }
               </div>
-              <Button onClick={ openAuthModal }>인증</Button>
+              {
+                user.university===null
+                ? <Button onClick={ openAuthModal }>인증</Button>
+                : <Button>인증 완료</Button>
+              }
             </Line>
             <Line style={{width:"680px"}}>
               <Text>회원 탈퇴</Text>
