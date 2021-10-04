@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import './AddListModal.css';
 
 class AddListModal extends Component {
 
@@ -14,7 +15,8 @@ class AddListModal extends Component {
                 <button className="close" onClick={close} />
               </header>
               <main onClick={isOpen}>
-                <text style={{fontSize:"37px"}}>수업목록에 추가</text>
+                <text>수업목록에 추가</text>
+                <text className="list">리스트 입니다</text>
               </main>
             </section>
           </div>
