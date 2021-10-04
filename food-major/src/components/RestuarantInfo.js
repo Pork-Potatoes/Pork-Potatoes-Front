@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { BsFillBookmarkFill, BsBookmark, BsStar } from "react-icons/bs";
+import { BsStar } from "react-icons/bs";
+import Scrap from './Scrap';
 
 const RestInfo = styled.div`
   display: flex;
@@ -51,8 +52,7 @@ const Map = styled.div`
 
 const { kakao } = window;
 
-const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore, scrap}) => {
-  const [scraped, setScraped] = useState(scrap);
+const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, businessHour, snsAccount, notice, avgScore}) => {
   useEffect(()=> {
     const container = document.getElementById('restMap');
       const options = {
@@ -82,7 +82,7 @@ const RestaurantInfo = ({restaurantNum, restaurantName, address, phoneNum, busin
       <RestInfo>
         <Title>
           <h2 style={{textAlign: 'center'}}>{restaurantName} <BsStar /> {avgScore}</h2>
-          {scraped ? <BsBookmark onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/> : <BsFillBookmarkFill onClick={()=>setScraped(!scraped)} color="#d57358" size="30"/>}
+          <Scrap />
         </Title>
         <Info>
           <Detail>

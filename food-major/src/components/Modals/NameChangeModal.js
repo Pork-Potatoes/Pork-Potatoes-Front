@@ -25,7 +25,7 @@ class NameChangeModal extends Component {
           success()
         }
         catch(e){
-          alert("다시 새도해주세요");
+          alert("다시 시도해주세요");
         }
       }
       return (
