@@ -17,33 +17,35 @@ const Input = styled.div`
     align-items: center;
     border-radius: 4px;
     box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.08), 0px 4px 16px rgba(51, 51, 51, 0.08);
-    width:35vw;
+    width:33vw;
     height:5vh;
     border: none;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
 `
 const InputConsol = styled.input`
     border: none;
     outline: none;
-    width: 35vw;
+    width: 30vw;
     height: 4vh;
 ` 
+
+const Button = styled.button`
+    background-color: white;
+    border: none;
+    width: 4vh;
+    height: 4vh;
+`
 
 const InputContent = styled.input`
     border: gray;
     outline: none;
     background-color: #F4F4F4;
-    width: 35vw;
-    height: 20vh;
-    margin-top:14px;
-    margin-bottom: 14px;
+    width: 33vw;
+    height: 25vh;
+    margin-top:1vh;
+    margin-bottom: 1vh;
 ` 
-const Button = styled.button`
-    background-color: white;
-    border: none;
-    width: 24px;
-    height: 24px;
-`
+
 
 const UploadButton = styled.button`
   width:35vw;
@@ -58,7 +60,7 @@ const RegisterButton = styled.button`
   width:25vw;
   min-height: 4vh;
   max-height:8vh;
-  margin-top: 20px;
+  margin-top: 1vh;
   background-color: white;
   border:solid 1px #BABABA;
   border-radius: 32px;
@@ -178,17 +180,17 @@ function WriteReviewPage (props) {
         <div className='modal'>
           <section>
             <header>
-              <img src={logo} height='40px'></img>
+              <img src={logo} height='40vh'></img>
               <button className="close" onClick={closeModal}></button>
             </header>
             <main>
               <Input>
-                <Button><img src={search} alt="search" height="15px"/></Button>
+                <Button><img src={search} alt="search" /></Button>
                 <InputConsol placeholder="맛집 이름을 입력해 주세요"
                 onChange={inputRestaurantChange}/>
               </Input>
               <Input>
-                <Button><img src={search} alt="search" height="15px"/></Button>
+                <Button><img src={search} alt="search" /></Button>
                 <InputConsol placeholder="메뉴를 입력해 주세요"
                 onChange={inputMenuChange}/>
               </Input>
@@ -196,7 +198,7 @@ function WriteReviewPage (props) {
               <ReactStars
                 count={5}
                 onChange={ratingChanged}
-                size={24}
+                size={30}
                 isHalf={true}
                 emptyIcon={<i className="far fa-star"></i>}
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
@@ -204,7 +206,7 @@ function WriteReviewPage (props) {
                 activeColor="#ffd700"
               />
               <hr size="10px" width="300vw" color="#D7D7D7" />
-              <text style={{fontSize:"20px",marginTop:"20px"}}>어떤 점이 좋았나요?</text>
+              <text style={{fontSize:"20px",marginTop:"1vh"}}>어떤 점이 좋았나요?</text>
               <InputContent placeholder="최소 10자 이상 입력해주세요." 
               onChange={inputContentChange}/>
               <input type="file" accept="image/*" onChange={processImage} id="input-file"/> 
