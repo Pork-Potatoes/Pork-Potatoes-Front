@@ -28,7 +28,7 @@ class ProfileChangeModal extends Component {
   render() {
     const { open, close } = this.props;
     const success = () => {
-      swal("변경되었습니다", {buttons: false, timer: 1000});
+      swal("변경되었습니다 ", { buttons: false, timer: 1000 });
       close();
     };
     const profileChange = async (event) => {
@@ -41,6 +41,7 @@ class ProfileChangeModal extends Component {
           frm,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
+        console.log(frm);
         success();
       } catch (e) {
         alert("다시 시도해 주세요");
